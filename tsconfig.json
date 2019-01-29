@@ -1,0 +1,10 @@
+{
+  "extends": "@stemn/tsconfig",
+  "compilerOptions": {
+    "outDir": "build"
+  },
+  "include": [
+    "src",
+    "typings.d.ts"
+  ]
+}

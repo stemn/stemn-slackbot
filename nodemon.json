@@ -1,0 +1,10 @@
+{
+  "env": {
+    "FORCE_COLOR": "true"
+  },
+  "exec": "node build",
+  "ext": "ts,json",
+  "watch": [
+    "build"
+  ]
+}

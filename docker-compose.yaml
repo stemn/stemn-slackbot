@@ -1,0 +1,37 @@
+version: '3.5'
+
+networks:
+  slack-backend:
+    driver: bridge
+
+services:
+
+  api:
+    image: node:11-alpine
+    command: yarn start:watch
+    restart: always
+    labels:
+      namespace: slack
+      tier: api
+    environment:
+      SLACK_BOT_USER_TOKEN: $SLACK_BOT_USER_TOKEN
+      SLACK_SIGNING_SECRET: $SLACK_SIGNING_SECRET
+    working_dir: /app
+    volumes:
+      - $PWD:/app
+    networks:
+      - slack-backend
+
+  webhooks:
+    image: webhookrelay/webhookrelayd:latest
+    entrypoint: ./relayd --mode tunnel
+    restart: always
+    tty: true
+    labels:
+      namespace: slack
+      tier: webhook
+    environment:
+      KEY: $WEBHOOK_RELAY_KEY
+      SECRET: $WEBHOOK_RELAY_SECRET
+    networks:
+      - slack-backend
