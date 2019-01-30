@@ -44,7 +44,7 @@
   "scripts": {
     "build": "yarn build:typescript",
     "build:typescript": "tsc",
-    "build:watch": "yarn build:typescript --watch",
+    "build:watch": "yarn build:typescript --watch --preserveWatchOutput",
     "docker:logs": "docker-compose logs -f",
     "docker:start": "docker-compose -f docker-compose.yaml -p stemn-slackbot up -d",
     "docker:stop": "docker-compose -f docker-compose.yaml down",

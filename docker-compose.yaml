@@ -22,6 +22,19 @@ services:
     networks:
       - slack-backend
 
+  build:
+    image: node:11-alpine
+    command: yarn build:watch
+    restart: always
+    labels:
+      namespace: slack
+      tier: build
+    working_dir: /app
+    volumes:
+      - $PWD:/app
+    networks:
+      - slack-backend
+
   webhooks:
     image: webhookrelay/webhookrelayd:latest
     entrypoint: ./relayd --mode tunnel
