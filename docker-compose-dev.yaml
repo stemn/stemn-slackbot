@@ -11,7 +11,7 @@ services:
   test:
     image: node:11-alpine
     command: yarn test:watch
-    restart: always
+    restart: on-failure
     labels:
       namespace: slack
       tier: test

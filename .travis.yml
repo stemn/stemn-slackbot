@@ -43,6 +43,7 @@ script:
       --env SLACK_PRIVATE_CHANNEL_2=$SLACK_PRIVATE_CHANNEL_2 \
       --env SLACK_PUBLIC_CHANNEL_1=$SLACK_PUBLIC_CHANNEL_1 \
       --env SLACK_PUBLIC_CHANNEL_2=$SLACK_PUBLIC_CHANNEL_2 \
+      --env STEMN_SLACK_BOT_SERVER_HOST=http://api \
       --name test \
       --network stemn-slackbot_slack-backend \
       node:11-alpine \

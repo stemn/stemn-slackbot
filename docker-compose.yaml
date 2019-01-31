@@ -9,7 +9,7 @@ services:
   api:
     image: node:11-alpine
     command: yarn start
-    restart: always
+    restart: on-failure
     labels:
       namespace: slack
       tier: api
@@ -25,7 +25,7 @@ services:
   build:
     image: node:11-alpine
     command: yarn build
-    restart: always
+    restart: on-failure
     labels:
       namespace: slack
       tier: build
@@ -38,7 +38,7 @@ services:
   webhooks:
     image: webhookrelay/webhookrelayd:latest
     entrypoint: ./relayd --mode tunnel
-    restart: always
+    restart: on-failure
     labels:
       namespace: slack
       tier: webhook
