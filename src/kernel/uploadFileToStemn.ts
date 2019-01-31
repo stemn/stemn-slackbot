@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
-import { getBotInfo, getFileInfo, postComment } from '../slack/client';
-import { IClientFileInfo, IEventFile, IShares } from '../types';
+import { getFileInfo, postComment, updateComment } from '../slack/client';
+import { IClientFileInfo, IClientPostMessage, IEventFile, IShares } from '../types';
 
 export async function uploadFileToStemn ({ file }: {
   file: IEventFile;
@@ -13,13 +13,21 @@ export async function uploadFileToStemn ({ file }: {
       fileId: file.file_id,
     });
 
-    // upload the file to stemn
-
-    // comment on the file notifying of a successful upload
-    await addFileComment({
+    // post comment that stemn is currently uploading the file
+    const fileComment = await addFileComment({
       fileInfo,
-      comment: 'File Uploaded to STEMN',
+      comment: `"${fileInfo.file.name}" is uploading to STEMN`,
       broadcast: true,
+      channel: file.channel_id,
+    });
+
+    // upload the file to stemn => should return a link to the file
+
+    // update the previous comment to notify that the file has been updated
+    await updateComment({
+      channel: fileComment.channel,
+      comment: 'file uploaded',
+      messageTimestamp: fileComment.ts,
     });
 
   } catch (e) {
@@ -27,39 +35,23 @@ export async function uploadFileToStemn ({ file }: {
   }
 }
 
-export async function addFileComment ({ fileInfo, comment, broadcast }: {
+export async function addFileComment ({ fileInfo, channel, comment, broadcast }: {
   fileInfo: IClientFileInfo;
+  channel: string;
   comment: string;
   broadcast: boolean;
-}): Promise<any> {
+}): Promise<IClientPostMessage> {
 
-  const { comments, file } = fileInfo;
+  const { file } = fileInfo;
 
-  const bot = await getBotInfo();
+  const shares = _.get(file.shares, `public.${channel}`) || _.get(file.shares, `private.${channel}`) as IShares;
 
-  console.log({ bot });
+  const { ts, latest_reply } = shares[0];
 
-  // if (comments[0].user_id === bot.bot.id) {
-  //   return;
-  // }
-
-  console.log({ comments });
-
-  const channels = file.channels;
-  const shares = file.shares;
-
-  // merge private and public channel arrays
-  const allShares = _.merge(shares.private || [], shares.public || []) as IShares;
-
-  _.forOwn(allShares, (replies, channel) => {
-
-    const { ts, latest_reply } = replies[0];
-
-    postComment({
-      channel,
-      comment,
-      threadTimestamp: latest_reply || ts,
-      broadcast,
-    });
+  return postComment({
+    channel,
+    comment,
+    threadTimestamp: latest_reply || ts,
+    broadcast,
   });
 }

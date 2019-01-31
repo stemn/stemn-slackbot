@@ -13,5 +13,5 @@ export async function postComment ({ channel, comment, threadTimestamp, broadcas
     thread_ts: threadTimestamp,
     reply_broadcast: broadcast,
     as_user: false,
-  });
+  }) as Promise<IClientPostMessage>;
 }

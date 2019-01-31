@@ -1,7 +1,7 @@
 import { createReadStream } from 'fs';
 import * as _ from 'lodash';
 
-import { getBotInfo, getFileInfo, uploadFile } from '../slack/client';
+import { getFileInfo, uploadFile } from '../slack/client';
 import { IClientFileInfo, IShares } from '../types';
 import { sleep } from './utils';
 
@@ -19,6 +19,7 @@ async function testFileUpload ({ channels }: {
   const { ok, file } = await uploadFile({
     channels,
     file: createReadStream(__dirname + '/sample_image.png'),
+    filename: `TEST FILE: ${new Date()}`,
   });
 
   // check response from slack was ok
@@ -36,25 +37,30 @@ async function testFileUpload ({ channels }: {
   const shares = fileInfo.file.shares;
   const allShares = _.merge(shares.private || [], shares.public || []) as IShares;
 
-  _.forOwn(allShares, (replies, channel) => {
+  _.forOwn(allShares, (replies) => {
     expect(replies.length).toBe(1);
   });
 
   return fileInfo;
 }
 
-describe('Slack Client Tests', () => {
+describe('Slack Client File Upload Tests', () => {
 
-  // it('Get Bot Info', async () => {
-  //   const { bot } = await getBotInfo();
-
-  //   expect(bot).toBeDefined();
-  // });
-
-  it('Simulate User File Upload', async () => {
+  it('Simulate User File Upload to Public Channel', async () => {
 
     // test public channel
     const file = await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL_1 });
+
+    // share the file to another channel
+
+    // test whether the comments followed and check the bot didn't try to recomment on the file
+
+  });
+
+  it('Simulate User File Upload to Private Channel', async () => {
+
+    // test public channel
+    const file = await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL_1 });
 
     // share the file to another channel
 

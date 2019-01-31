@@ -6,4 +6,5 @@ export interface IEventFile {
   readonly file_id: string;
   readonly user_id: string;
   readonly event_ts: string;
+  readonly channel_id: string;
 }
