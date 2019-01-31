@@ -22,6 +22,13 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
+  - |
+    docker run \
+      -v $PWD:/app \
+      -w /app \
+      node:11-alpine \
+      yarn
+
 script:
   - docker-compose -f docker-compose.yaml -p stemn-slackbot up -d
 
