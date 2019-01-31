@@ -1,0 +1,15 @@
+interface IEnvTest {
+  SLACK_PRIVATE_CHANNEL_1: string;
+  SLACK_PRIVATE_CHANNEL_2: string;
+  SLACK_PUBLIC_CHANNEL_1: string;
+  SLACK_PUBLIC_CHANNEL_2: string;
+  STEMN_SLACK_BOT_SERVER_HOST: string;
+}
+
+export const {
+  SLACK_PRIVATE_CHANNEL_1,
+  SLACK_PRIVATE_CHANNEL_2,
+  SLACK_PUBLIC_CHANNEL_1,
+  SLACK_PUBLIC_CHANNEL_2,
+  STEMN_SLACK_BOT_SERVER_HOST = 'localhost',
+}: IEnvTest = <any> process.env;

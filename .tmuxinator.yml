@@ -1,0 +1,10 @@
+name: dashboard
+
+windows:
+  - main:
+      layout: tiled
+      panes:
+        - docker logs -f stemn-slackbot_webhooks_1
+        - docker logs -f stemn-slackbot_build_1
+        - docker logs -f stemn-slackbot_test_1
+        - docker logs -f stemn-slackbot_api_1
