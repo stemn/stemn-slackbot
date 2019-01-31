@@ -1,10 +1,9 @@
 
 <h1 align="center">
   <br>
-  <a href="https://www.stemn.com/"><img src="docs/logo.png" alt="STEMN Slackbot" width="250"></a>
+  <a href="https://www.stemn.com/"><img src="docs/astronaut.svg" alt="STEMN Logo" width="120"></a>
   <br>
-  <br>
-  SLACKBOT
+  Slackbot
   <br>
 </h1>
 
