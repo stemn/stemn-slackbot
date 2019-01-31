@@ -8,7 +8,7 @@ services:
 
   api:
     image: node:11-alpine
-    command: yarn start:watch
+    command: yarn start
     restart: always
     labels:
       namespace: slack
@@ -22,29 +22,9 @@ services:
     networks:
       - slack-backend
 
-  test:
-    image: node:11-alpine
-    command: yarn test:watch
-    restart: always
-    labels:
-      namespace: slack
-      tier: test
-    environment:
-      SLACK_BOT_USER_TOKEN: $SLACK_TEST_USER_TOKEN
-      SLACK_PRIVATE_CHANNEL_1: $SLACK_PRIVATE_CHANNEL_1
-      SLACK_PRIVATE_CHANNEL_2: $SLACK_PRIVATE_CHANNEL_2
-      SLACK_PUBLIC_CHANNEL_1: $SLACK_PUBLIC_CHANNEL_1
-      SLACK_PUBLIC_CHANNEL_2: $SLACK_PUBLIC_CHANNEL_2
-      STEMN_SLACK_BOT_SERVER_HOST: http://api
-    working_dir: /app
-    volumes:
-      - $PWD:/app
-    networks:
-      - slack-backend
-
   build:
     image: node:11-alpine
-    command: yarn build:watch
+    command: yarn build
     restart: always
     labels:
       namespace: slack
@@ -55,15 +35,15 @@ services:
     networks:
       - slack-backend
 
-  # webhooks:
-  #   image: webhookrelay/webhookrelayd:latest
-  #   entrypoint: ./relayd --mode tunnel
-  #   restart: always
-  #   labels:
-  #     namespace: slack
-  #     tier: webhook
-  #   environment:
-  #     KEY: $WEBHOOK_RELAY_KEY
-  #     SECRET: $WEBHOOK_RELAY_SECRET
-  #   networks:
-  #     - slack-backend
+  webhooks:
+    image: webhookrelay/webhookrelayd:latest
+    entrypoint: ./relayd --mode tunnel
+    restart: always
+    labels:
+      namespace: slack
+      tier: webhook
+    environment:
+      KEY: $WEBHOOK_RELAY_KEY
+      SECRET: $WEBHOOK_RELAY_SECRET
+    networks:
+      - slack-backend

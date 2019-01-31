@@ -1,0 +1,26 @@
+language: bash
+
+services:
+  - docker
+
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/node_modules
+    - $TRAVIS_BUILD_DIR/build
+
+before_install:
+  - docker-compose -f docker-compose.yaml -p stemn-slackbot up -d
+
+script:
+  - docker run \
+    -v $PWD:/app \
+    -w /app \
+    --env SLACK_BOT_USER_TOKEN=$SLACK_TEST_USER_TOKEN \
+    --env SLACK_PRIVATE_CHANNEL_1=$SLACK_PRIVATE_CHANNEL_1 \
+    --env SLACK_PRIVATE_CHANNEL_2=$SLACK_PRIVATE_CHANNEL_2 \
+    --env SLACK_PUBLIC_CHANNEL_1=$SLACK_PUBLIC_CHANNEL_1 \
+    --env SLACK_PUBLIC_CHANNEL_2=$SLACK_PUBLIC_CHANNEL_2 \
+    --name test \
+    --network stemn-slackbot_slack-backend \
+    node:11-alpine \
+    yarn test
