@@ -1,7 +1,16 @@
 import * as _ from 'lodash';
+import * as rp from 'request-promise';
 
 import { getFileInfo, postComment, updateComment } from '../slack/client';
 import { IClientFileInfo, IClientPostMessage, IEventFile, IShares } from '../types';
+
+import {
+  SLACK_BOT_USER_TOKEN,
+  STEMN_API_HOST,
+  STEMN_API_PORT,
+  STEMN_API_PROTOCOL,
+  STEMN_API_TOKEN,
+} from '../config';
 
 export async function uploadFileToStemn ({ file }: {
   file: IEventFile;
@@ -13,6 +22,8 @@ export async function uploadFileToStemn ({ file }: {
       fileId: file.file_id,
     });
 
+    console.log({ fileInfo });
+
     // post comment that stemn is currently uploading the file
     const fileComment = await addFileComment({
       fileInfo,
@@ -21,12 +32,27 @@ export async function uploadFileToStemn ({ file }: {
       channel: file.channel_id,
     });
 
-    // upload the file to stemn => should return a link to the file
+    const getFile = rp(fileInfo.file.url_private_download, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${SLACK_BOT_USER_TOKEN}`,
+        'Content-type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    const uploadFile = rp(`${STEMN_API_PROTOCOL}://${STEMN_API_HOST}:${STEMN_API_PORT}/api/v1/uploads`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${STEMN_API_TOKEN}`,
+      },
+    });
+
+    await uploadFile.pipe(getFile);
 
     // update the previous comment to notify that the file has been updated
     await updateComment({
       channel: fileComment.channel,
-      comment: 'file uploaded',
+      comment: `"${fileInfo.file.name}" has been uploaded to STEMN`,
       messageTimestamp: fileComment.ts,
     });
 

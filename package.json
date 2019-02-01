@@ -6,13 +6,17 @@
   "dependencies": {
     "@slack/client": "^4.8.0",
     "@slack/events-api": "^2.1.1",
+    "@slack/interactive-messages": "^1.0.2",
+    "@types/request": "^2.48.1",
+    "@types/request-promise": "^4.1.42",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
     "lodash": "^4.17.11",
     "morgan": "^1.9.0",
-    "node-fetch": "^2.3.0",
-    "pjson": "^1.0.9"
+    "pjson": "^1.0.9",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
   },
   "description": "",
   "devDependencies": {
@@ -24,15 +28,11 @@
     "@types/lodash": "^4.14.120",
     "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.11",
-    "@types/node-fetch": "^2.1.4",
     "@types/supertest": "^2.0.7",
     "nodemon": "^1.18.9",
     "supertest": "^3.4.2",
     "tslint": "^5.11.0",
     "typescript": "^3.2.1"
-  },
-  "engines": {
-    "node": ">=10.0.0"
   },
   "homepage": "https://github.com/stemn/stemn#readme",
   "license": "MIT",
@@ -46,8 +46,7 @@
   "scripts": {
     "build": "yarn build:typescript",
     "build:typescript": "tsc",
-    "build:watch": "yarn build:typescript --watch --preserveWatchOutput",
-    "docker:logs": "docker-compose logs -f",
+    "build:watch": "yarn build:typescript --watch",
     "docker:restart": "yarn docker:stop && yarn docker:start",
     "docker:start": "docker-compose -f docker-compose.yaml -f docker-compose-dev.yaml -p stemn-slackbot up -d",
     "docker:stop": "docker-compose -f docker-compose.yaml -f docker-compose-dev.yaml down",

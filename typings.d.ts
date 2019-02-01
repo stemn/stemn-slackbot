@@ -3,3 +3,4 @@ declare module "*.json" {
 }
 
 declare module '@slack/events-api';
+declare module '@slack/interactive-messages';
