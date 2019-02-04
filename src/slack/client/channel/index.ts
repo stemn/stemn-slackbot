@@ -1,0 +1,1 @@
+export { getWorkspaceChannels } from './getWorkspaceChannels';

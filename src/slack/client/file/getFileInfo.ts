@@ -1,5 +1,5 @@
-import { IClientFileInfo } from '../../types';
-import { client } from './client';
+import { IClientFileInfo } from '../../../types';
+import { client } from '../client';
 
 export async function getFileInfo ({ fileId }: {
   fileId: string;

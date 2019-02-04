@@ -2,7 +2,7 @@ import { createReadStream } from 'fs';
 import * as _ from 'lodash';
 
 import { getFileInfo, uploadFile } from '../slack/client';
-import { IClientFileInfo, IShares } from '../types';
+import { IClientFileInfo, IClientShares } from '../types';
 import { sleep } from './utils';
 
 import {
@@ -35,7 +35,7 @@ async function testFileUpload ({ channels }: {
   expect(fileInfo.ok).toBeTruthy();
 
   const shares = fileInfo.file.shares;
-  const allShares = _.merge(shares.private || [], shares.public || []) as IShares;
+  const allShares = _.merge(shares.private || [], shares.public || []) as IClientShares;
 
   _.forOwn(allShares, (replies) => {
     expect(replies.length).toBe(1);
@@ -49,22 +49,14 @@ describe('Slack Client File Upload Tests', () => {
   it('Simulate User File Upload to Public Channel', async () => {
 
     // test public channel
-    const file = await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL_1 });
-
-    // share the file to another channel
-
-    // test whether the comments followed and check the bot didn't try to recomment on the file
+    await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL_1 });
 
   });
 
   it('Simulate User File Upload to Private Channel', async () => {
 
-    // test public channel
-    const file = await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL_1 });
-
-    // share the file to another channel
-
-    // test whether the comments followed and check the bot didn't try to recomment on the file
+    // test private channel
+     await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL_1 });
 
   });
 });

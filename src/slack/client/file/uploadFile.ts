@@ -1,5 +1,5 @@
-import { IClientFile } from '../../types';
-import { client } from './client';
+import { IClientFile } from '../../../types';
+import { client } from '../client';
 
 export async function uploadFile ({ channels, file, filename = 'New File', filetype = 'auto', comment = '' }: {
   channels: string;

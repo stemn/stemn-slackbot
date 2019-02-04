@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
 import { getFileInfo, postComment, updateComment } from '../slack/client';
-import { IClientFileInfo, IClientPostMessage, IEventFile, IShares } from '../types';
+import { IClientFileInfo, IClientMessagePost, IClientShares, IEventFile } from '../types';
 
 import {
   SLACK_BOT_USER_TOKEN,
@@ -22,8 +22,6 @@ export async function uploadFileToStemn ({ file }: {
       fileId: file.file_id,
     });
 
-    console.log({ fileInfo });
-
     // post comment that stemn is currently uploading the file
     const fileComment = await addFileComment({
       fileInfo,
@@ -40,14 +38,14 @@ export async function uploadFileToStemn ({ file }: {
       },
     });
 
-    const uploadFile = rp(`${STEMN_API_PROTOCOL}://${STEMN_API_HOST}:${STEMN_API_PORT}/api/v1/uploads`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${STEMN_API_TOKEN}`,
-      },
-    });
+    // const uploadFile = rp(`${STEMN_API_PROTOCOL}://${STEMN_API_HOST}:${STEMN_API_PORT}/api/v1/uploads`, {
+    //   method: 'POST',
+    //   headers: {
+    //     Authorization: `Bearer ${STEMN_API_TOKEN}`,
+    //   },
+    // });
 
-    await uploadFile.pipe(getFile);
+    // await uploadFile.pipe(getFile);
 
     // update the previous comment to notify that the file has been updated
     await updateComment({
@@ -66,11 +64,11 @@ export async function addFileComment ({ fileInfo, channel, comment, broadcast }:
   channel: string;
   comment: string;
   broadcast: boolean;
-}): Promise<IClientPostMessage> {
+}): Promise<IClientMessagePost> {
 
   const { file } = fileInfo;
 
-  const shares = _.get(file.shares, `public.${channel}`) || _.get(file.shares, `private.${channel}`) as IShares;
+  const shares = _.get(file.shares, `public.${channel}`) || _.get(file.shares, `private.${channel}`) as IClientShares;
 
   const { ts, latest_reply } = shares[0];
 
