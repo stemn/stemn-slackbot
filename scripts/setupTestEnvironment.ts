@@ -58,6 +58,10 @@ createChannels().then(async ({ channel, group }) => {
   const privateChannelFile = await uploadFile(groupId);
 
   const data = `
+  # Slackbot secrets
+  SLACK_SIGNING_SECRET=
+
+  # Testing Configuration
   SLACK_BOT_ID=
   SLACK_BOT_TOKEN=
 
@@ -69,9 +73,13 @@ createChannels().then(async ({ channel, group }) => {
 
   SLACK_PUBLIC_CHANNEL=${channelId}
   SLACK_PUBLIC_CHANNEL_FILE_ID=${_.get(publicChannelFile, 'file.id')}
+
+  # Webhook relay
+  WEBHOOK_RELAY_KEY=
+  WEBHOOK_RELAY_SECRET=
   `;
 
-  writeFileSync(__dirname + `/${OUTPUT_FILE}`, data, 'utf8');
+  writeFileSync(__dirname + `/../${OUTPUT_FILE}`, data, 'utf8');
 
   console.log('Completed');
 });

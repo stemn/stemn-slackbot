@@ -36,7 +36,10 @@
 
 ## Setup Slack
 
-*
+### Setting up the Bot
+
+#### Required Scopes
+
 
 ## How To Use
 
@@ -50,24 +53,13 @@ $ cd stemn-slackbot
 # Install dependencies
 $ docker run -v $PWD:/app -w /app node:11-alpine yarn
 
-# Create a .env file AND populate the environment variables
-# Refer to the Setup Slack section for details
-$ echo "
-  # Slackbot secrets
-  SLACK_SIGNING_SECRET=
-  SLACK_BOT_USER_TOKEN=
-
-  # Testing Slackbot
-  SLACK_TEST_USER_TOKEN=
-  SLACK_PRIVATE_CHANNEL_1=
-  SLACK_PRIVATE_CHANNEL_2=
-  SLACK_PUBLIC_CHANNEL_1=
-  SLACK_PUBLIC_CHANNEL_2=
-
-  # Webhook relay
-  WEBHOOK_RELAY_KEY=
-  WEBHOOK_RELAY_SECRET=
-  " >> .env
+# Run the following with your USER token to create a .env file in the root directory
+# NOTE: You will still need to populate a number of fields in the .env file
+# NOTE: Your user will need access to the following scopes
+# * channels:write
+# * groups:write
+# * files:write:user
+$  yarn setup:test:environment token=
 
 # Run stack
 $ yarn docker:start
