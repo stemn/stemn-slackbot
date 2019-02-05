@@ -61,7 +61,7 @@ createChannels().then(async ({ channel, group }) => {
   SLACK_BOT_ID=
   SLACK_BOT_TOKEN=
 
-  SLACK_USER_ID=
+  SLACK_USER_ID=${_.get(privateChannelFile, 'file.user')}
   SLACK_USER_TOKEN=${token}
 
   SLACK_PRIVATE_CHANNEL=${groupId}
