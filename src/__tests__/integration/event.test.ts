@@ -33,18 +33,8 @@ async function testFileUpload ({ channels }: {
   channels: string;
 }): Promise<IClientFileInfo> {
 
-  const userClient = new Client({
-    token: SLACK_USER_TOKEN,
-  });
-
-  const botClient = new Client({
-    botId: SLACK_BOT_ID,
-    token: SLACK_BOT_TOKEN,
-  });
-
   // simulate user file upload
   const { ok, file } = await uploadTestFile({
-    client: userClient,
     channels,
   });
 
@@ -54,9 +44,14 @@ async function testFileUpload ({ channels }: {
   // wait for the bot to comment on the file
   await sleep(2);
 
+  const client = new Client({
+    botId: SLACK_BOT_ID,
+    token: SLACK_BOT_TOKEN,
+  });
+
   // check the file has one comment from the stemn slack bot
   const fileInfo = await getFileInfo({
-    client: botClient,
+    client,
     fileId: file.id,
   });
 
