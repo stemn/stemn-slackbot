@@ -1,9 +1,8 @@
-import { createReadStream } from 'fs';
 import * as _ from 'lodash';
 
-import { Client, getFileInfo, uploadFile } from '../../slack';
+import { Client, getFileInfo } from '../../slack';
 import { IClientFileInfo, IClientShares } from '../../types';
-import { sleep } from '../utils';
+import { sleep, uploadTestFile } from '../utils';
 
 import {
   SLACK_BOT_ID,
@@ -44,11 +43,9 @@ async function testFileUpload ({ channels }: {
   });
 
   // simulate user file upload
-  const { ok, file } = await uploadFile({
+  const { ok, file } = await uploadTestFile({
     client: userClient,
     channels,
-    file: createReadStream(__dirname + '/sample_image.png'),
-    filename: `TEST FILE: ${new Date()}`,
   });
 
   // check response from slack was ok

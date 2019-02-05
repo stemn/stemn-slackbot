@@ -1,23 +1,33 @@
 import { Client } from '../../../slack';
-import { ITestConfig } from '../../../types';
+import { IEventFile, ITestConfig } from '../../../types';
 import { uploadToStemn } from '../uploadToStemn';
 
 const {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
-  SLACK_PUBLIC_CHANNEL_2,
+  SLACK_USER_ID,
+  SLACK_PUBLIC_CHANNEL_1,
+  SLACK_PUBLIC_CHANNEL_1_FILE_ID,
 }: ITestConfig = <any> process.env;
 
 it('Upload To Stemn', async () => {
 
-  // const client = new Client({
-  //   botId: SLACK_BOT_ID,
-  //   token: SLACK_BOT_TOKEN,
-  // });
+  const client = new Client({
+    botId: SLACK_BOT_ID,
+    token: SLACK_BOT_TOKEN,
+  });
 
-  // const uploaded = await uploadToStemn({
-  //   client,
+  const fileEvent = <IEventFile> {
+    user_id: SLACK_USER_ID,
+    file_id: SLACK_PUBLIC_CHANNEL_1_FILE_ID,
+    channel_id: SLACK_PUBLIC_CHANNEL_1,
+  };
 
-  // });
+  const uploaded = await uploadToStemn({
+    client,
+    file: fileEvent,
+  });
+
+  console.log({ uploaded });
 
 });

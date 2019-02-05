@@ -13,7 +13,7 @@ export class Client extends WebClient {
 
     // lookup user from stemn -> get their bot token and id
       // TODO: Implement once api becomes available...
-    const usersBotToken = getBotToken({ userId });
+    const usersBotToken = getBotToken({ userId: '' });
 
     super(token || usersBotToken);
 
