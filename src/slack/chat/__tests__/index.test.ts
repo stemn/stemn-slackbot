@@ -6,7 +6,7 @@ import { updateChat } from '../updateChat';
 const {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
-  SLACK_PUBLIC_CHANNEL_2,
+  SLACK_PUBLIC_CHANNEL,
 }: ITestConfig = <any> process.env;
 
 describe('Post and Update a Comment', () => {
@@ -20,16 +20,16 @@ describe('Post and Update a Comment', () => {
 
     const postedComment = await postChat({
       client,
-      channel: SLACK_PUBLIC_CHANNEL_2,
-      comment: 'test',
+      channel: SLACK_PUBLIC_CHANNEL,
+      comment: 'Test Comment',
     });
 
     expect(postedComment.ok).toBe(true);
 
     const updatedComment = await updateChat({
       client,
-      channel: SLACK_PUBLIC_CHANNEL_2,
-      comment: 'updated test',
+      channel: SLACK_PUBLIC_CHANNEL,
+      comment: 'Updated Test Comment',
       messageTimestamp: postedComment.ts,
     });
 

@@ -6,8 +6,8 @@ const {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
   SLACK_USER_ID,
-  SLACK_PUBLIC_CHANNEL_1,
-  SLACK_PUBLIC_CHANNEL_1_FILE_ID,
+  SLACK_PUBLIC_CHANNEL,
+  SLACK_PUBLIC_CHANNEL_FILE_ID,
 }: ITestConfig = <any> process.env;
 
 it('Upload To Stemn', async () => {
@@ -19,8 +19,8 @@ it('Upload To Stemn', async () => {
 
   const fileEvent = <IEventFile> {
     user_id: SLACK_USER_ID,
-    file_id: SLACK_PUBLIC_CHANNEL_1_FILE_ID,
-    channel_id: SLACK_PUBLIC_CHANNEL_1,
+    file_id: SLACK_PUBLIC_CHANNEL_FILE_ID,
+    channel_id: SLACK_PUBLIC_CHANNEL,
   };
 
   await uploadToStemn({

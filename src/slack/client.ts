@@ -3,7 +3,6 @@ import { WebClient } from '@slack/client';
 export class Client extends WebClient {
 
   public botId: string;
-  public token: string;
 
   constructor ({ userId, token, botId }: {
     userId?: string;
@@ -11,17 +10,20 @@ export class Client extends WebClient {
     botId?: string;
   }) {
 
-    // lookup user from stemn -> get their bot token and id
-      // TODO: Implement once api becomes available...
-    const usersBotToken = getBotToken({ userId: '' });
+    let botToken = token;
 
-    super(token || usersBotToken);
+    if (userId) {
+      // lookup user from stemn -> get their bot token and id
+      botToken = getBotToken({ userId: '' });
+    }
 
-    this.token = token || '';
+    super(botToken);
+
     this.botId = botId || '';
   }
 }
 
+// TODO: Implement once api becomes available...
 function getBotToken ({ userId }: {
   userId: string;
 }): string {

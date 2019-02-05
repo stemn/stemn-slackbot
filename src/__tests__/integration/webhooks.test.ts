@@ -4,7 +4,7 @@ import { request } from '../utils';
 import {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
-  SLACK_PRIVATE_CHANNEL_1,
+  SLACK_PRIVATE_CHANNEL,
 } from '../config';
 
 describe('Webhooks', () => {
@@ -20,7 +20,7 @@ describe('Webhooks', () => {
       team_id: '',
       incoming_webhook: {
           channel: '',
-          channel_id: `${SLACK_PRIVATE_CHANNEL_1}`,
+          channel_id: `${SLACK_PRIVATE_CHANNEL}`,
           configuration_url: '',
           url: '',
       },

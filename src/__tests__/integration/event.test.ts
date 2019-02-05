@@ -7,8 +7,8 @@ import { sleep, uploadTestFile } from '../utils';
 import {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
-  SLACK_PRIVATE_CHANNEL_1,
-  SLACK_PUBLIC_CHANNEL_1,
+  SLACK_PRIVATE_CHANNEL,
+  SLACK_PUBLIC_CHANNEL,
 } from '../config';
 
 describe('Slack Events', () => {
@@ -16,14 +16,14 @@ describe('Slack Events', () => {
   it('User Uploaded to Public Channel', async () => {
 
     // test public channel
-    await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL_1 });
+    await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL });
 
   });
 
   it('User Uploaded to Private Channel', async () => {
 
     // test private channel
-     await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL_1 });
+     await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL });
 
   });
 });
