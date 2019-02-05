@@ -1,11 +1,12 @@
-import { IClientMessagePost } from '../../../types';
-import { client } from '../client';
+import { IClientMessagePost } from '../../types';
+import { Client } from '../client';
 
-export async function postComment ({ channel, comment, threadTimestamp, broadcast = false }: {
+export async function postComment ({ client, channel, comment, threadTimestamp = '', broadcast = false }: {
+  client: Client;
   channel: string;
   comment: string;
-  threadTimestamp: string;
-  broadcast: boolean;
+  threadTimestamp?: string;
+  broadcast?: boolean;
 }): Promise<IClientMessagePost> {
   return client.chat.postMessage({
     channel,

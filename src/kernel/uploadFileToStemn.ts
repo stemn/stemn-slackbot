@@ -1,29 +1,35 @@
 import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
-import { getFileInfo, postComment, updateComment } from '../slack/client';
+import { Client, getFileInfo, postComment, updateComment } from '../slack';
 import { IClientFileInfo, IClientMessagePost, IClientShares, IEventFile } from '../types';
 
-import {
-  SLACK_BOT_USER_TOKEN,
-  STEMN_API_HOST,
-  STEMN_API_PORT,
-  STEMN_API_PROTOCOL,
-  STEMN_API_TOKEN,
-} from '../config';
+// import {
+//   STEMN_API_HOST,
+//   STEMN_API_PORT,
+//   STEMN_API_PROTOCOL,
+//   STEMN_API_TOKEN,
+// } from '../config';
 
-export async function uploadFileToStemn ({ file }: {
+export async function uploadFileToStemn ({ file, client }: {
   file: IEventFile;
+  client?: Client;
 }): Promise<any> {
+
+  const { file_id, user_id } = file;
+
+  client = client || new Client({ userId: user_id });
 
   try {
 
     const fileInfo = await getFileInfo({
-      fileId: file.file_id,
+      client,
+      fileId: file_id,
     });
 
     // post comment that stemn is currently uploading the file
-    const fileComment = await addFileComment({
+    const { channel, ts } = await addFileComment({
+      client,
       fileInfo,
       comment: `"${fileInfo.file.name}" is uploading to STEMN`,
       broadcast: true,
@@ -33,7 +39,7 @@ export async function uploadFileToStemn ({ file }: {
     const getFile = rp(fileInfo.file.url_private_download, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${SLACK_BOT_USER_TOKEN}`,
+        'Authorization': `Bearer ${client.token}`,
         'Content-type': 'application/x-www-form-urlencoded',
       },
     });
@@ -49,9 +55,10 @@ export async function uploadFileToStemn ({ file }: {
 
     // update the previous comment to notify that the file has been updated
     await updateComment({
-      channel: fileComment.channel,
+      client,
+      channel,
       comment: `"${fileInfo.file.name}" has been uploaded to STEMN`,
-      messageTimestamp: fileComment.ts,
+      messageTimestamp: ts,
     });
 
   } catch (e) {
@@ -59,7 +66,8 @@ export async function uploadFileToStemn ({ file }: {
   }
 }
 
-export async function addFileComment ({ fileInfo, channel, comment, broadcast }: {
+async function addFileComment ({ client, fileInfo, channel, comment, broadcast }: {
+  client: Client;
   fileInfo: IClientFileInfo;
   channel: string;
   comment: string;
@@ -73,6 +81,7 @@ export async function addFileComment ({ fileInfo, channel, comment, broadcast }:
   const { ts, latest_reply } = shares[0];
 
   return postComment({
+    client,
     channel,
     comment,
     threadTimestamp: latest_reply || ts,

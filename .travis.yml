@@ -28,6 +28,12 @@ before_install:
       -w /app \
       node:11-alpine \
       yarn
+  - |
+    docker run \
+      -v $PWD:/app \
+      -w /app \
+      node:11-alpine \
+      yarn build
 
 script:
   - docker-compose -f docker-compose.yaml -p stemn-slackbot up -d

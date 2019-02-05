@@ -1,4 +1,4 @@
-export * from './events';
-export * from './interactions';
+export * from './channel';
+export * from './file';
+export * from './message';
 export * from './client';
-export * from './webhooks';

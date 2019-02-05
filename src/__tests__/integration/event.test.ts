@@ -1,22 +1,51 @@
 import { createReadStream } from 'fs';
 import * as _ from 'lodash';
 
-import { getFileInfo, uploadFile } from '../slack/client';
-import { IClientFileInfo, IClientShares } from '../types';
-import { sleep } from './utils';
+import { Client, getFileInfo, uploadFile } from '../../slack';
+import { IClientFileInfo, IClientShares } from '../../types';
+import { sleep } from '../utils';
 
 import {
+  SLACK_BOT_ID,
+  SLACK_BOT_TOKEN,
   SLACK_PRIVATE_CHANNEL_1,
-  SLACK_PRIVATE_CHANNEL_2,
   SLACK_PUBLIC_CHANNEL_1,
-  SLACK_PUBLIC_CHANNEL_2,
-} from './config';
+  SLACK_USER_TOKEN,
+} from '../config';
+
+describe('Slack Events', () => {
+
+  it('User Uploaded to Public Channel', async () => {
+
+    // test public channel
+    await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL_1 });
+
+  });
+
+  it('User Uploaded to Private Channel', async () => {
+
+    // test private channel
+     await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL_1 });
+
+  });
+});
 
 async function testFileUpload ({ channels }: {
   channels: string;
 }): Promise<IClientFileInfo> {
 
+  const userClient = new Client({
+    token: SLACK_USER_TOKEN,
+  });
+
+  const botClient = new Client({
+    botId: SLACK_BOT_ID,
+    token: SLACK_BOT_TOKEN,
+  });
+
+  // simulate user file upload
   const { ok, file } = await uploadFile({
+    client: userClient,
     channels,
     file: createReadStream(__dirname + '/sample_image.png'),
     filename: `TEST FILE: ${new Date()}`,
@@ -29,7 +58,10 @@ async function testFileUpload ({ channels }: {
   await sleep(2);
 
   // check the file has one comment from the stemn slack bot
-  const fileInfo = await getFileInfo({ fileId: file.id });
+  const fileInfo = await getFileInfo({
+    client: botClient,
+    fileId: file.id,
+  });
 
   // check response from slack was ok
   expect(fileInfo.ok).toBeTruthy();
@@ -43,20 +75,3 @@ async function testFileUpload ({ channels }: {
 
   return fileInfo;
 }
-
-describe('Slack Client File Upload Tests', () => {
-
-  it('Simulate User File Upload to Public Channel', async () => {
-
-    // test public channel
-    await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL_1 });
-
-  });
-
-  it('Simulate User File Upload to Private Channel', async () => {
-
-    // test private channel
-     await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL_1 });
-
-  });
-});

@@ -6,7 +6,7 @@ import {
   eventsMiddleware,
   interactionsMiddleware,
   webhooksMiddleware,
-} from './slack';
+} from './api';
 
 export const router = Router();
 

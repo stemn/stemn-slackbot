@@ -1,9 +1,10 @@
-import { IClientMessageUpdate } from '../../../types';
-import { client } from '../client';
+import { IClientMessageUpdate } from '../../types';
+import { Client } from '../client';
 
-export async function updateComment ({ channel, comment, messageTimestamp }: {
+export async function updateComment ({ client, channel, comment, messageTimestamp }: {
   channel: string;
   comment: string;
+  client: Client;
   messageTimestamp: string;
 }): Promise<IClientMessageUpdate> {
   return client.chat.update({

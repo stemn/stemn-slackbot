@@ -1,12 +1,13 @@
-import { IClientFile } from '../../../types';
-import { client } from '../client';
+import { IClientFile } from '../../types';
+import { Client } from '../client';
 
-export async function uploadFile ({ channels, file, filename = 'New File', filetype = 'auto', comment = '' }: {
+export async function uploadFile ({ client, channels, file, filename = 'New File', filetype = 'auto', comment = '' }: {
   channels: string;
+  client: Client;
+  comment?: string;
   file: any;
   filename?: string;
   filetype?: string;
-  comment?: string;
 }): Promise<IClientFile> {
 
   return client.files.upload({

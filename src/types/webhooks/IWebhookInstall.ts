@@ -12,4 +12,8 @@ export interface IWebhookInstall extends ISlackResponse {
       readonly configuration_url: string;
       readonly url: string;
   };
+  readonly bot: {
+    readonly bot_user_id: string;
+    readonly bot_access_token: string;
+  };
 }
