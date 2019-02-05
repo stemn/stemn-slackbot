@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
-import { Client, getFileInfo, updateComment } from '../../slack';
+import { Client, getFileInfo, updateChat } from '../../slack';
 import { IEventFile } from '../../types';
 import { addFileComment } from './addFileComment';
 
@@ -55,7 +55,7 @@ export async function uploadToStemn ({ file, client }: {
     // await uploadFile.pipe(getFile);
 
     // update the previous comment to notify that the file has been updated
-    await updateComment({
+    await updateChat({
       client,
       channel,
       comment: `"${fileInfo.file.name}" has been uploaded to STEMN`,

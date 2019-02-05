@@ -1,7 +1,7 @@
 import { IClientMessagePost } from '../../types';
 import { Client } from '../client';
 
-export async function postComment ({ client, channel, comment, threadTimestamp = '', broadcast = false }: {
+export async function postChat ({ client, channel, comment, threadTimestamp = '', broadcast = false }: {
   client: Client;
   channel: string;
   comment: string;

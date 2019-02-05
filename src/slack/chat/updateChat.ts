@@ -1,7 +1,7 @@
 import { IClientMessageUpdate } from '../../types';
 import { Client } from '../client';
 
-export async function updateComment ({ client, channel, comment, messageTimestamp }: {
+export async function updateChat ({ client, channel, comment, messageTimestamp }: {
   channel: string;
   comment: string;
   client: Client;

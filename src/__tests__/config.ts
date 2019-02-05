@@ -3,6 +3,7 @@ import { ITestConfig } from '../types';
 export const {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
+  SLACK_USER_ID,
   SLACK_USER_TOKEN,
   SLACK_PRIVATE_CHANNEL_1,
   SLACK_PRIVATE_CHANNEL_2,

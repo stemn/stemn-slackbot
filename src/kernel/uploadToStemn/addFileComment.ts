@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { Client, postComment } from '../../slack';
+import { Client, postChat } from '../../slack';
 import { IClientFileInfo, IClientMessagePost, IClientShares } from '../../types';
 
 export async function addFileComment ({ client, fileInfo, channel, comment, broadcast }: {
@@ -17,7 +17,7 @@ export async function addFileComment ({ client, fileInfo, channel, comment, broa
 
   const { ts, latest_reply } = shares[0];
 
-  return postComment({
+  return postChat({
     client,
     channel,
     comment,

@@ -1,7 +1,7 @@
 import { ITestConfig } from '../../../types';
 import { Client } from '../../client';
-import { postComment } from '../postComment';
-import { updateComment } from '../updateComment';
+import { postChat } from '../postChat';
+import { updateChat } from '../updateChat';
 
 const {
   SLACK_BOT_ID,
@@ -18,24 +18,21 @@ describe('Post and Update a Comment', () => {
       token: SLACK_BOT_TOKEN,
     });
 
-    const postedComment = await postComment({
+    const postedComment = await postChat({
       client,
       channel: SLACK_PUBLIC_CHANNEL_2,
       comment: 'test',
     });
 
-    console.log({ postedComment });
+    expect(postedComment.ok).toBe(true);
 
-    const updatedComment = await updateComment({
+    const updatedComment = await updateChat({
       client,
       channel: SLACK_PUBLIC_CHANNEL_2,
       comment: 'updated test',
       messageTimestamp: postedComment.ts,
     });
 
-    console.log({ updatedComment });
-
-    expect(true).toBe(true);
-
+    expect(updatedComment.ok).toBe(true);
   });
 });

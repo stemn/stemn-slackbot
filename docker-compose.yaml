@@ -15,6 +15,7 @@ services:
       tier: api
     environment:
       STEMN_SLACK_SIGNING_SECRET: $STEMN_SLACK_SIGNING_SECRET
+      SLACK_BOT_TOKEN: $SLACK_BOT_TOKEN
     working_dir: /app
     ports:
       - 3000:3000
