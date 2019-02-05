@@ -14,24 +14,10 @@ services:
       namespace: slack
       tier: api
     environment:
-      SLACK_BOT_USER_TOKEN: $SLACK_BOT_USER_TOKEN
-      SLACK_SIGNING_SECRET: $SLACK_SIGNING_SECRET
+      STEMN_SLACK_SIGNING_SECRET: $STEMN_SLACK_SIGNING_SECRET
     working_dir: /app
     ports:
       - 3000:3000
-    volumes:
-      - $PWD:/app
-    networks:
-      - slack-backend
-
-  build:
-    image: node:11-alpine
-    command: yarn build
-    restart: on-failure
-    labels:
-      namespace: slack
-      tier: build
-    working_dir: /app
     volumes:
       - $PWD:/app
     networks:

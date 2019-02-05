@@ -5,18 +5,17 @@ services:
   api:
     command: yarn start:watch
 
-  build:
-    command: yarn build:watch
-
   test:
-    image: node:11-alpine
+    image: tomnlittle/node-jest
     command: yarn test:watch
     restart: on-failure
     labels:
       namespace: slack
       tier: test
     environment:
-      SLACK_BOT_USER_TOKEN: $SLACK_TEST_USER_TOKEN
+      SLACK_BOT_ID: $SLACK_BOT_ID
+      SLACK_USER_TOKEN: $SLACK_USER_TOKEN
+      SLACK_BOT_TOKEN: $SLACK_BOT_TOKEN
       SLACK_PRIVATE_CHANNEL_1: $SLACK_PRIVATE_CHANNEL_1
       SLACK_PRIVATE_CHANNEL_2: $SLACK_PRIVATE_CHANNEL_2
       SLACK_PUBLIC_CHANNEL_1: $SLACK_PUBLIC_CHANNEL_1

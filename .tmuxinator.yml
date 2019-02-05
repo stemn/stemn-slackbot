@@ -2,10 +2,9 @@ name: dashboard
 
 windows:
   - main:
-      layout: af12,248x72,0,0[249x17,0,0{118x17,0,0,3,130x17,119,0,4},249x55,0,18{118x55,0,18[118x27,0,18,5,118x27,0,46,13],130x55,119,18,6}]
+      layout: tiled
       panes:
         - docker logs -f stemn-slackbot_webhooks_1
-        - docker logs -f stemn-slackbot_build_1
         - docker logs -f stemn-slackbot_test_1
         - docker logs -f stemn-slackbot_api_1
         - zsh || bash
