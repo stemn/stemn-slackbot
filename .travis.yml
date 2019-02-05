@@ -28,6 +28,7 @@ before_install:
       -w /app \
       node:11-alpine \
       yarn
+
   - |
     docker run \
       -v $PWD:/app \
@@ -44,11 +45,13 @@ script:
     docker run \
       -v $PWD:/app \
       -w /app \
-      --env SLACK_BOT_USER_TOKEN=$SLACK_TEST_USER_TOKEN \
-      --env SLACK_PRIVATE_CHANNEL_1=$SLACK_PRIVATE_CHANNEL_1 \
-      --env SLACK_PRIVATE_CHANNEL_2=$SLACK_PRIVATE_CHANNEL_2 \
-      --env SLACK_PUBLIC_CHANNEL_1=$SLACK_PUBLIC_CHANNEL_1 \
-      --env SLACK_PUBLIC_CHANNEL_2=$SLACK_PUBLIC_CHANNEL_2 \
+      --env SLACK_BOT_ID=$SLACK_BOT_ID \
+      --env SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN \
+      --env SLACK_USER_ID=$SLACK_USER_ID \
+      --env SLACK_USER_TOKEN=$SLACK_USER_TOKEN \
+      --env SLACK_PRIVATE_CHANNEL=$SLACK_PRIVATE_CHANNEL \
+      --env SLACK_PUBLIC_CHANNEL=$SLACK_PUBLIC_CHANNEL \
+      --env SLACK_PUBLIC_CHANNEL_FILE_ID=$SLACK_PUBLIC_CHANNEL_FILE_ID \
       --env STEMN_SLACK_BOT_SERVER_HOST=http://api \
       --name test \
       --network stemn-slackbot_slack-backend \
