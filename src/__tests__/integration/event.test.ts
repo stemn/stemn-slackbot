@@ -9,7 +9,6 @@ import {
   SLACK_BOT_TOKEN,
   SLACK_PRIVATE_CHANNEL_1,
   SLACK_PUBLIC_CHANNEL_1,
-  SLACK_USER_TOKEN,
 } from '../config';
 
 describe('Slack Events', () => {

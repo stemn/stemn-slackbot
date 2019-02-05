@@ -1,4 +1,4 @@
-import { Client } from '../../../slack';
+import { Client, getFileInfo } from '../../../slack';
 import { IEventFile, ITestConfig } from '../../../types';
 import { uploadToStemn } from '../uploadToStemn';
 
@@ -23,11 +23,15 @@ it('Upload To Stemn', async () => {
     channel_id: SLACK_PUBLIC_CHANNEL_1,
   };
 
-  const uploaded = await uploadToStemn({
+  await uploadToStemn({
     client,
     file: fileEvent,
   });
 
-  console.log({ uploaded });
+  const { ok } = await getFileInfo({
+    client,
+    fileId: fileEvent.file_id,
+  });
 
+  expect(ok).toBe(true);
 });
