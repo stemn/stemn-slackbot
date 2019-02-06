@@ -16,6 +16,7 @@ services:
     environment:
       STEMN_SLACK_SIGNING_SECRET: $STEMN_SLACK_SIGNING_SECRET
       SLACK_BOT_TOKEN: $SLACK_BOT_TOKEN
+      STEMN_SLACK_BOT_SERVER_PORT: 3000
     working_dir: /app
     ports:
       - 3000:3000

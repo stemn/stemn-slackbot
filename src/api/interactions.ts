@@ -1,7 +1,7 @@
 import { createMessageAdapter } from '@slack/interactive-messages';
 
-import { STEMN_SLACK_SIGNING_SECRET } from '../config';
-import { toggleAllNotifications } from '../kernel/toggleNotifications';
+import { STEMN_SLACK_SIGNING_SECRET } from '../config/slack';
+import { toggleAllNotifications } from '../core/toggleNotifications';
 
 const interactions = createMessageAdapter(STEMN_SLACK_SIGNING_SECRET);
 

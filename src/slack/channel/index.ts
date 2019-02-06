@@ -1,1 +1,1 @@
-export { getWorkspaceChannels } from './getWorkspaceChannels';
+export * from './getAll';

@@ -1,2 +1,2 @@
-export { postChat } from './postChat';
-export { updateChat } from './updateChat';
+export * from './post';
+export * from './update';

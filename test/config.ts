@@ -1,0 +1,20 @@
+interface ITestConfig {
+  SLACK_BOT_ID: string;
+  SLACK_BOT_TOKEN: string;
+  SLACK_USER_ID: string;
+  SLACK_USER_TOKEN: string;
+  SLACK_PRIVATE_CHANNEL: string;
+  SLACK_PUBLIC_CHANNEL: string;
+  SLACK_PUBLIC_CHANNEL_FILE_ID: string;
+  STEMN_SLACK_BOT_SERVER_HOST: string;
+}
+export const {
+  SLACK_BOT_ID,
+  SLACK_BOT_TOKEN,
+  SLACK_USER_ID,
+  SLACK_USER_TOKEN,
+  SLACK_PRIVATE_CHANNEL,
+  SLACK_PUBLIC_CHANNEL,
+  SLACK_PUBLIC_CHANNEL_FILE_ID,
+  STEMN_SLACK_BOT_SERVER_HOST = 'localhost',
+}: ITestConfig = <any> process.env;

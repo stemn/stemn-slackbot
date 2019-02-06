@@ -4,6 +4,7 @@ import { createReadStream, writeFileSync } from 'fs';
 import * as _ from 'lodash';
 
 const OUTPUT_FILE = '.env';
+const SAMPLE_FILE = __dirname + '/../test/sample_image.png';
 
 if (process.argv.length !== 3) {
   console.log('Supply your slack token');
@@ -41,7 +42,7 @@ async function uploadFile (channel: string) {
 
   const fileInfo = client.files.upload({
     channels: channel,
-    file: createReadStream(__dirname + '/sample_image.png'),
+    file: createReadStream(SAMPLE_FILE),
     filename,
     initial_comment: 'Root File for testing purposes',
   });
