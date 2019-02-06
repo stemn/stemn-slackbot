@@ -45,6 +45,7 @@ export async function welcomeUser ({
       channel: webhook.incoming_webhook.channel_id,
       message,
     });
+
   } catch (e) {
     console.error(e);
   }

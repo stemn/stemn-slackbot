@@ -21,6 +21,51 @@ interface ISlackClientMessageAction {
   };
 }
 
+interface IAction {
+  name: string;
+  id: string;
+}
+
+const createAction = ({ name, id }: IAction): ISlackClientMessageAction => ({
+  name,
+  text: name,
+  type: 'button',
+  value: id,
+  confirm: {
+    title: 'Are you sure?',
+    text: `You want to sync '${name}' with this workspace`,
+    ok_text: 'Yes',
+    dismiss_text: 'No',
+  },
+});
+
+function createMessage ({ title, body, fallbackBody, actions, callbackId }: {
+  actions: IAction[];
+  body: string;
+  callbackId: string;
+  fallbackBody: string;
+  title: string;
+}): ISlackClientChatMessage {
+
+  const newActions: ISlackClientMessageAction[] = [];
+
+  _.forEach(actions, (action) => {
+    newActions.push(createAction(action));
+  });
+
+  return {
+    comment: title,
+    attachments: [
+      {
+        text: body,
+        fallback: fallbackBody,
+        callback_id: callbackId,
+        color: COLOUR,
+        actions: newActions,
+      }],
+  };
+}
+
 export const FILE_UPLOADING = (filename: string): ISlackClientChatMessage => ({
   comment: `"${filename}" is uploading to STEMN`,
 });
@@ -29,39 +74,24 @@ export const FILE_UPLOADED = (filename: string, url: string): ISlackClientChatMe
   comment: `"${filename}" has been uploaded to ${url}`,
 });
 
-export function WELCOME_MESSAGE ({ projects, callbackId }: {
-  projects: any;
+export const CHOOSE_FOLDER = ({ folders, callbackId }: {
+  folders: IAction[];
   callbackId: string;
-}): ISlackClientChatMessage {
+}): ISlackClientChatMessage => createMessage({
+  actions: folders,
+  body: 'Choose one of the folders below to sync',
+  callbackId,
+  fallbackBody: 'You do not have any folders to sync',
+  title: 'Choose a folder to Sync',
+});
 
-  const createAction = (name: string, id: string): ISlackClientMessageAction => ({
-    name,
-    text: name,
-    type: 'button',
-    value: id,
-    confirm: {
-      title: 'Are you sure?',
-      text: `You want to sync '${name}' with this workspace`,
-      ok_text: 'Yes',
-      dismiss_text: 'No',
-    },
-  });
-
-  const actions: ISlackClientMessageAction[] = [];
-
-  _.forEach(projects, ({ name, id }) => {
-    actions.push(createAction(name, id));
-  });
-
-  return {
-    comment: `Hello! I'm the STEMN bot`,
-    attachments: [
-      {
-        text: 'Choose a project to sync with this slack workspace',
-        fallback: 'You have no projects to sync with the workspace',
-        callback_id: callbackId,
-        color: COLOUR,
-        actions,
-      }],
-  };
-}
+export const WELCOME_MESSAGE = ({ projects, callbackId }: {
+  projects: IAction[];
+  callbackId: string;
+}): ISlackClientChatMessage => createMessage({
+  actions: projects,
+  body: 'Choose a project to sync with this slack workspace',
+  callbackId,
+  fallbackBody: 'You have no projects to sync with the workspace',
+  title: `Hello! I'm the STEMN bot`,
+});

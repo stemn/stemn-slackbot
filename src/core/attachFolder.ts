@@ -34,21 +34,18 @@ interface IPayload {
   trigger_id: string;
 }
 
-export async function attachProject (payload: IPayload, respond: any): Promise<any> {
+export async function attachFolder (payload: IPayload, respond: any): Promise<any> {
 
   // get folders with slack user id
 
   const folders = [{
-    name: 'Folder 1',
-    id: '12345678',
-  }, {
-    name: 'Folder 2',
-    id: '987654321',
+    name: '1',
+    id: '1',
   }];
 
   const message = CHOOSE_FOLDER({
     folders,
-    callbackId: 'attach_folder',
+    callbackId: '',
   });
 
   respond(message);
