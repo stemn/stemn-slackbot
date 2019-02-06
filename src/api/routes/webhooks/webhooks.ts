@@ -1,6 +1,6 @@
 import { json, Request, Response, Router } from 'express';
 
-import { onBoardUser } from '../../../core/onBoardUser';
+import { welcomeUser } from '../../../core/welcomeUser';
 
 export const webhooksMiddleware = Router();
 
@@ -11,7 +11,7 @@ webhooksMiddleware.all('/installed', (req: Request, res: Response) => {
   // respond to webhook
   res.json();
 
-  // onBoardUser({
+  // welcomeUser({
   //   webhook: req.body,
   // });
 });

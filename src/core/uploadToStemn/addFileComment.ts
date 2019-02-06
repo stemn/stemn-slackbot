@@ -5,16 +5,25 @@ import {
   IClientChatPost,
   IClientFileInfo,
   IClientFileShares,
+  ISlackClientChatMessage,
   postChat,
 } from '../../slack';
 
-export async function addFileComment ({ client, fileInfo, channel, comment, broadcast }: {
+interface MethodArguments {
   client: Client;
   fileInfo: IClientFileInfo;
   channel: string;
-  comment: string;
+  message: ISlackClientChatMessage;
   broadcast: boolean;
-}): Promise<IClientChatPost> {
+}
+
+export async function addFileComment ({
+  client,
+  fileInfo,
+  channel,
+  message,
+  broadcast,
+}: MethodArguments): Promise<IClientChatPost> {
 
   const { file } = fileInfo;
 
@@ -25,7 +34,7 @@ export async function addFileComment ({ client, fileInfo, channel, comment, broa
   return postChat({
     client,
     channel,
-    comment,
+    message,
     threadTimestamp: latest_reply || ts,
     broadcast,
   });

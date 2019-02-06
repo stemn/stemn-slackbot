@@ -1,5 +1,6 @@
 import { Client } from '../client';
 import { postChat, updateChat } from './';
+import { FILE_UPLOADED, FILE_UPLOADING } from './messages';
 
 import {
   SLACK_BOT_ID,
@@ -19,7 +20,7 @@ describe('Client Chat Tests', () => {
     const postedComment = await postChat({
       client,
       channel: SLACK_PUBLIC_CHANNEL,
-      comment: 'Test Comment',
+      message: FILE_UPLOADING('Test Message'),
     });
 
     expect(postedComment.ok).toBe(true);
@@ -27,7 +28,7 @@ describe('Client Chat Tests', () => {
     const updatedComment = await updateChat({
       client,
       channel: SLACK_PUBLIC_CHANNEL,
-      comment: 'Updated Test Comment',
+      message: FILE_UPLOADED('Test Message', 'Updated'),
       messageTimestamp: postedComment.ts,
     });
 

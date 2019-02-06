@@ -1,26 +1,31 @@
 import { Client } from '../../client';
+import { ISlackClientChatMessage } from '../messages';
 import { IClientChatPost } from './IClientChatPost';
 
 interface MethodArguments {
-  client: Client;
-  channel: string;
-  comment: string;
-  threadTimestamp?: string;
   broadcast?: boolean;
+  channel: string;
+  client: Client;
+  message: ISlackClientChatMessage;
+  threadTimestamp?: string;
 }
 
 export async function postChat ({
-  client,
-  channel,
-  comment,
-  threadTimestamp = '',
   broadcast = false,
+  channel,
+  client,
+  message,
+  threadTimestamp = '',
 }: MethodArguments): Promise<IClientChatPost> {
+
+  const { comment, attachments = [] } = message;
+
   return client.chat.postMessage({
     channel,
     text: comment,
     thread_ts: threadTimestamp,
     reply_broadcast: broadcast,
     as_user: false,
+    attachments,
   }) as Promise<IClientChatPost>;
 }

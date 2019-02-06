@@ -1,5 +1,5 @@
 import { IWebhookInstall } from '../../types';
-import { onBoardUser } from './onBoardUser';
+import { welcomeUser } from './welcomeUser';
 
 import {
   SLACK_BOT_ID,
@@ -8,7 +8,7 @@ import {
   SLACK_USER_TOKEN,
 } from '../../../test/config';
 
-describe('Core - onBoardUser', () => {
+describe('Core - Welcome User', () => {
 
   it('', async () => {
 
@@ -31,8 +31,12 @@ describe('Core - onBoardUser', () => {
       },
     };
 
-    onBoardUser({
+    welcomeUser({
       webhook,
     });
+
+    // check that the welcome message was sent
+
+    // check that the mock api has the keys etc
   });
 });

@@ -32,7 +32,7 @@ export async function uploadToStemn ({ file, client }: {
     const { channel, ts } = await addFileComment({
       client,
       fileInfo,
-      comment: FILE_UPLOADING(fileInfo.file.name),
+      message: FILE_UPLOADING(fileInfo.file.name),
       broadcast: true,
       channel: file.channel_id,
     });
@@ -58,7 +58,7 @@ export async function uploadToStemn ({ file, client }: {
     await updateChat({
       client,
       channel,
-      comment: FILE_UPLOADED(fileInfo.file.name, ''),
+      message: FILE_UPLOADED(fileInfo.file.name, ''),
       messageTimestamp: ts,
     });
 
