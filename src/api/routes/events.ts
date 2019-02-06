@@ -1,8 +1,8 @@
 import { createEventAdapter } from '@slack/events-api';
 
-import { STEMN_SLACK_SIGNING_SECRET } from '../config/slack';
-import { uploadToStemn } from '../core/uploadToStemn';
-import { IEventFile } from '../types';
+import { STEMN_SLACK_SIGNING_SECRET } from '../../config/slack';
+import { uploadToStemn } from '../../core/uploadToStemn';
+import { IEventFile } from '../../types';
 
 const events = createEventAdapter(STEMN_SLACK_SIGNING_SECRET);
 

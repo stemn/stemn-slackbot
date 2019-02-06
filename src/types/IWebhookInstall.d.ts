@@ -1,4 +1,4 @@
-import { ISlackResponse } from '../ISlackResponse';
+import { ISlackResponse } from './ISlackResponse';
 
 export interface IWebhookInstall extends ISlackResponse {
   readonly access_token: string;

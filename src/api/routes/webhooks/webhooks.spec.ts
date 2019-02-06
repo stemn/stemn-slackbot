@@ -1,13 +1,14 @@
 import * as request from 'supertest';
 
-import { server } from '../../server';
-import { IWebhookInstall } from '../../types';
+import { server } from '../../../server';
+import { IWebhookInstall } from '../../../types';
 
 import {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
   SLACK_PRIVATE_CHANNEL,
-} from '../../../test/config';
+  SLACK_USER_TOKEN,
+} from '../../../../test/config';
 
 describe('Webhooks', () => {
 
@@ -15,14 +16,14 @@ describe('Webhooks', () => {
 
     const body = <IWebhookInstall> {
       ok: true,
-      access_token: '',
+      access_token: SLACK_USER_TOKEN,
       scope: 'identify,bot,commands,incoming-webhook,chat:write:bot',
       user_id: '',
       team_name: '',
       team_id: '',
       incoming_webhook: {
           channel: '',
-          channel_id: `${SLACK_PRIVATE_CHANNEL}`,
+          channel_id: SLACK_PRIVATE_CHANNEL,
           configuration_url: '',
           url: '',
       },

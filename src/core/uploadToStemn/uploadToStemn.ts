@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
-import { Client, getFileInfo, updateChat } from '../../slack';
+import { Client, FILE_UPLOADED, FILE_UPLOADING, getFileInfo, updateChat } from '../../slack';
 import { IEventFile } from '../../types';
 import { addFileComment } from './addFileComment';
 
@@ -32,7 +32,7 @@ export async function uploadToStemn ({ file, client }: {
     const { channel, ts } = await addFileComment({
       client,
       fileInfo,
-      comment: `"${fileInfo.file.name}" is uploading to STEMN`,
+      comment: FILE_UPLOADING(fileInfo.file.name),
       broadcast: true,
       channel: file.channel_id,
     });
@@ -58,7 +58,7 @@ export async function uploadToStemn ({ file, client }: {
     await updateChat({
       client,
       channel,
-      comment: `"${fileInfo.file.name}" has been uploaded to STEMN`,
+      comment: FILE_UPLOADED(fileInfo.file.name, ''),
       messageTimestamp: ts,
     });
 

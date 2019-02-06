@@ -1,3 +1,3 @@
-export * from './events';
-export * from './webhooks';
+export * from './IEventFile';
+export * from './IWebhookInstall';
 export * from './ISlackResponse';
