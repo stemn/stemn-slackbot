@@ -1,6 +1,6 @@
 import { createReadStream } from 'fs';
 
-import { Client, IClientFile, uploadFile } from '../../src/slack';
+import { Client, IClientFile, uploadFile } from '../../src/client';
 import { SLACK_USER_TOKEN } from '../config';
 
 export async function uploadTestFile ({ channels }: {

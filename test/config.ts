@@ -8,6 +8,7 @@ interface ITestConfig {
   SLACK_PUBLIC_CHANNEL_FILE_ID: string;
   STEMN_SLACK_BOT_SERVER_HOST: string;
 }
+
 export const {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
