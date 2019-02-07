@@ -5,7 +5,7 @@ import {
   getFileInfo,
   IClientFileInfo,
   IClientFileShares,
-} from '../src/slack';
+} from '../src/client';
 
 import { sleep, uploadTestFile } from './utils';
 
