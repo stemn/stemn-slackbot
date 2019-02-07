@@ -54,7 +54,7 @@
     "docker:stop": "docker-compose -f docker-compose.yaml -f docker-compose-dev.yaml down",
     "lint": "yarn tsc --noEmit",
     "setup:test:environment": "ts-node scripts/setupTestEnvironment",
-    "start": "node build/app",
+    "start": "node build/src/app",
     "start:watch": "tsc-watch --onSuccess 'yarn start'",
     "terminal": "tmuxinator local",
     "test": "jest",

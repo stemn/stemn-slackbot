@@ -1,15 +1,15 @@
 {
-  "extends": "@stemn/tsconfig",
   "compilerOptions": {
     "outDir": "build"
   },
-  "include": [
-    "src",
-    "typings.d.ts"
-  ],
   "exclude": [
     "node_modules",
+  ],
+  "extends": "@stemn/tsconfig",
+  "include": [
+    "test",
     "**/*.spec.ts",
-    "test"
+    "src",
+    "typings.d.ts"
   ]
 }
