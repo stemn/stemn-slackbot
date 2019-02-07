@@ -17,7 +17,6 @@ describe('Client Chat Tests', () => {
   it('Post Comment and then Update the text', async () => {
 
     const client = new Client({
-      botId: SLACK_BOT_ID,
       token: SLACK_BOT_TOKEN,
     });
 
