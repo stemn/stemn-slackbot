@@ -1,6 +1,10 @@
 import { Client } from '../client';
-import { postChat, updateChat } from './';
-import { FILE_UPLOADED, FILE_UPLOADING } from './messages';
+import {
+  FILE_UPLOADED,
+  FILE_UPLOADING,
+  postChat,
+  updateChat,
+} from './';
 
 import {
   SLACK_BOT_ID,
