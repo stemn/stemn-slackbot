@@ -2,10 +2,9 @@ import { WebClient } from '@slack/client';
 
 export class Client extends WebClient {
 
-  constructor ({ userId, token, botId }: {
+  constructor ({ userId, token }: {
     userId?: string;
     token?: string;
-    botId?: string;
   }) {
 
     let botToken = token;

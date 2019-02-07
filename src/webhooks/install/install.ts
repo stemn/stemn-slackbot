@@ -13,7 +13,6 @@ export async function install ({
   // auth the client as the bot
   const client = new Client({
     token: webhook.bot.bot_access_token,
-    botId: webhook.bot.bot_user_id,
   });
 
   try {
