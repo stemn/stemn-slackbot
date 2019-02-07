@@ -1,4 +1,5 @@
 import { Client, postChat, WELCOME_MESSAGE } from '../../client';
+import { ATTACH_PROJECT_CALLBACK_ID } from '../../interactions/attach';
 import { IWebhookInstall } from './IWebhookInstall';
 
 interface MethodArguments {
@@ -37,7 +38,7 @@ export async function install ({
     // welcome the user ask the user what project they want to upload too
     const message = WELCOME_MESSAGE({
       projects,
-      callbackId: 'attach_project',
+      callbackId: ATTACH_PROJECT_CALLBACK_ID,
     });
 
     await postChat({

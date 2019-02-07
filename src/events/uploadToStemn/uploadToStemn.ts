@@ -2,8 +2,8 @@ import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
 import { Client, FILE_UPLOADED, FILE_UPLOADING, getFileInfo, updateChat } from '../../client';
-import { IEventFile } from '../IEventFile';
 import { addFileComment } from './addFileComment';
+import { IEventFile } from './IEventFile';
 
 // import {
 //   STEMN_API_HOST,

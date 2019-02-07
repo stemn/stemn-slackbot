@@ -1,6 +1,6 @@
 import { Client, getFileInfo } from '../../client';
-import { IEventFile } from '../../types';
 import { uploadToStemn } from '../uploadToStemn';
+import { IEventFile } from './IEventFile';
 
 import {
   SLACK_BOT_ID,

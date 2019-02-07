@@ -1,9 +1,13 @@
-import { CHOOSE_FOLDER } from '../../client';
+import { CHOOSE_FOLDER, ISlackClientChatMessage } from '../../client';
 import { IInteractionsPayload } from '../IInteractionsPayload';
 
-export async function attachProject (payload: IInteractionsPayload, respond: any): Promise<any> {
+export const ATTACH_PROJECT_CALLBACK_ID = 'attach_project';
 
-  // get folders with slack user id
+export async function attachProject (payload: IInteractionsPayload): Promise<ISlackClientChatMessage> {
+
+  // set the users slack project to the payloads
+  // const project = payload.
+  console.log({ payload });
 
   const folders = [{
     name: 'Folder 1',
@@ -13,16 +17,8 @@ export async function attachProject (payload: IInteractionsPayload, respond: any
     id: '987654321',
   }];
 
-  const message = CHOOSE_FOLDER({
+  return CHOOSE_FOLDER({
     folders,
     callbackId: 'attach_folder',
   });
-
-  respond(message);
-
-  // Before the work completes, return a message object that is the same as the original but with
-  // the interactive elements removed.
-  const reply = payload.original_message;
-  delete reply.attachments[0].actions;
-  return reply;
 }
