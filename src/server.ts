@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as helmet from 'helmet';
 import * as morgan from 'morgan';
 import { version } from 'pjson';
 
@@ -9,6 +10,7 @@ import { webhooksMiddleware } from './webhooks';
 const router = express.Router();
 
 router.use(morgan('dev'));
+router.use(helmet());
 
 router.use('/slack/events', eventsMiddleware);
 router.use('/slack/interactions', interactionsMiddleware);
