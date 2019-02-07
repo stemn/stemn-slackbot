@@ -1,5 +1,5 @@
-import { ISlackClientChatMessage, SUCCESSFUL_FOLDER_SETUP } from '../../client';
-import { IInteractionsPayload } from '../IInteractionsPayload';
+import { ISlackClientChatMessage, SUCCESSFUL_FOLDER_SETUP } from '../../../client';
+import { IInteractionsPayload } from '../../IInteractionsPayload';
 
 export const ATTACH_FOLDER_CALLBACK_ID = 'attach_folder';
 

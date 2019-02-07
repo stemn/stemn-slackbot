@@ -1,6 +1,6 @@
-import { CHOOSE_FOLDER, ISlackClientChatMessage } from '../../client';
-import { IInteractionsPayload } from '../IInteractionsPayload';
-import { ATTACH_FOLDER_CALLBACK_ID } from './folder';
+import { CHOOSE_FOLDER, ISlackClientChatMessage } from '../../../client';
+import { IInteractionsPayload } from '../../IInteractionsPayload';
+import { ATTACH_FOLDER_CALLBACK_ID } from '../folder';
 
 export const ATTACH_PROJECT_CALLBACK_ID = 'attach_project';
 

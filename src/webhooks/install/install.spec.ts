@@ -5,6 +5,7 @@ import {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
   SLACK_PRIVATE_CHANNEL,
+  SLACK_USER_ID,
   SLACK_USER_TOKEN,
 } from '../../../test/config';
 
@@ -16,7 +17,7 @@ describe('Webhooks', () => {
       ok: true,
       access_token: SLACK_USER_TOKEN,
       scope: 'identify,bot,commands,incoming-webhook,chat:write:bot',
-      user_id: '',
+      user_id: SLACK_USER_ID,
       team_name: '',
       team_id: '',
       incoming_webhook: {
