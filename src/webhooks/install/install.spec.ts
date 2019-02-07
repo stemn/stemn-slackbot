@@ -1,4 +1,6 @@
-import { install } from './install';
+import * as request from 'supertest';
+
+import { server } from '../../server';
 import { IWebhookInstall } from './IWebhookInstall';
 
 import {
@@ -8,11 +10,11 @@ import {
   SLACK_USER_TOKEN,
 } from '../../../test/config';
 
-describe('Core - Welcome User', () => {
+describe('Webhooks', () => {
 
-  it('', async () => {
+  it('Slack App Installed', async () => {
 
-    const webhook = <IWebhookInstall> {
+    const body = <IWebhookInstall> {
       ok: true,
       access_token: SLACK_USER_TOKEN,
       scope: 'identify,bot,commands,incoming-webhook,chat:write:bot',
@@ -31,12 +33,10 @@ describe('Core - Welcome User', () => {
       },
     };
 
-    install({
-      webhook,
-    });
+    const { status } = await request(server)
+      .post('/api/slack/webhooks/installed')
+      .send(body);
 
-    // check that the welcome message was sent
-
-    // check that the mock api has the keys etc
+    expect(status).toEqual(200);
   });
 });
