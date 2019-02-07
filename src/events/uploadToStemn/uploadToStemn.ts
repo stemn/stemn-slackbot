@@ -6,9 +6,10 @@ import {
   FILE_UPLOADED,
   FILE_UPLOADING,
   getFileInfo,
+  getFilesLatestShare,
+  postChat,
   updateChat,
 } from '../../client';
-import { addFileComment } from './addFileComment';
 import { IEventFile } from './IEventFile';
 
 // import {
@@ -33,13 +34,17 @@ export async function uploadToStemn ({ file }: {
       fileId: file_id,
     });
 
-    // post comment that stemn is currently uploading the file
-    const { channel, ts } = await addFileComment({
-      client,
+    const { latest_reply } = getFilesLatestShare({
       fileInfo,
-      message: FILE_UPLOADING(fileInfo.file.name),
-      broadcast: true,
       channel: file.channel_id,
+    });
+
+    const { ts } = await postChat({
+      client,
+      channel: file.channel_id,
+      message: FILE_UPLOADING(fileInfo.file.name),
+      broadcast: false,
+      threadTimestamp: latest_reply,
     });
 
     const getFile = rp(fileInfo.file.url_private_download, {
@@ -62,7 +67,7 @@ export async function uploadToStemn ({ file }: {
     // update the previous comment to notify that the file has been updated
     await updateChat({
       client,
-      channel,
+      channel: file.channel_id,
       message: FILE_UPLOADED(fileInfo.file.name, ''),
       messageTimestamp: ts,
     });

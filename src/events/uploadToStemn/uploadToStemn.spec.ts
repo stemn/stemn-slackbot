@@ -1,12 +1,10 @@
 import { WebClient } from '@slack/client';
 
 import { getFileInfo } from '../../client';
-import { addFileComment } from './addFileComment';
 import { IEventFile } from './IEventFile';
 import { uploadToStemn } from './uploadToStemn';
 
 import {
-  SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
   SLACK_PUBLIC_CHANNEL,
   SLACK_PUBLIC_CHANNEL_FILE_ID,
@@ -32,8 +30,6 @@ it('Upload To Stemn', async () => {
   await uploadToStemn({
     file: fileEvent,
   });
-
-  // expect(addFileComment).toHaveBeenCalledTimes(1);
 
   const { ok } = await getFileInfo({
     client,

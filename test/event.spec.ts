@@ -10,7 +10,6 @@ import {
 import { sleep, uploadTestFile } from './utils';
 
 import {
-  SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
   SLACK_PRIVATE_CHANNEL,
   SLACK_PUBLIC_CHANNEL,
@@ -49,7 +48,6 @@ async function testFileUpload ({ channels }: {
   await sleep(2);
 
   const client = new Client({
-    botId: SLACK_BOT_ID,
     token: SLACK_BOT_TOKEN,
   });
 
