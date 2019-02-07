@@ -1,6 +1,4 @@
-import * as request from 'supertest';
-
-import { server } from '../../server';
+import { install } from './install';
 import { IWebhookInstall } from './IWebhookInstall';
 
 import {
@@ -33,10 +31,8 @@ describe('Webhooks', () => {
       },
     };
 
-    const { status } = await request(server)
-      .post('/api/slack/webhooks/installed')
-      .send(body);
-
-    expect(status).toEqual(200);
+    const response = await install({
+      webhook: body,
+    });
   });
 });

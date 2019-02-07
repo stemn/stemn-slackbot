@@ -18,11 +18,11 @@ export async function postChat ({
   threadTimestamp = '',
 }: MethodArguments): Promise<IClientChatPost> {
 
-  const { comment, attachments = [] } = message;
+  const { text, attachments = [] } = message;
 
   return client.chat.postMessage({
     channel,
-    text: comment,
+    text,
     thread_ts: threadTimestamp,
     reply_broadcast: broadcast,
     as_user: false,

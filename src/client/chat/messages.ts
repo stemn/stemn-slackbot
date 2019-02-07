@@ -1,24 +1,11 @@
-import { MessageAttachment } from '@slack/client';
+import { AttachmentAction, MessageAttachment } from '@slack/client';
 import * as _ from 'lodash';
 
 const COLOUR = '#3AA3E3';
 
 export interface ISlackClientChatMessage {
-  comment: string;
-  attachments?: MessageAttachment[];
-}
-
-interface ISlackClientMessageAction {
-  name: string;
   text: string;
-  type: string;
-  value: string;
-  confirm: {
-    title: string;
-    text: string;
-    ok_text: string;
-    dismiss_text: string;
-  };
+  attachments?: MessageAttachment[];
 }
 
 interface IAction {
@@ -26,7 +13,7 @@ interface IAction {
   id: string;
 }
 
-const createAction = ({ name, id }: IAction): ISlackClientMessageAction => ({
+const createAction = ({ name, id }: IAction): AttachmentAction => ({
   name,
   text: name,
   type: 'button',
@@ -47,14 +34,14 @@ function createMessage ({ title, body, fallbackBody, actions, callbackId }: {
   title: string;
 }): ISlackClientChatMessage {
 
-  const newActions: ISlackClientMessageAction[] = [];
+  const newActions: AttachmentAction[] = [];
 
   _.forEach(actions, (action) => {
     newActions.push(createAction(action));
   });
 
   return {
-    comment: title,
+    text: title,
     attachments: [
       {
         text: body,
@@ -67,11 +54,11 @@ function createMessage ({ title, body, fallbackBody, actions, callbackId }: {
 }
 
 export const FILE_UPLOADING = (filename: string): ISlackClientChatMessage => ({
-  comment: `"${filename}" is uploading to STEMN`,
+  text: `"${filename}" is uploading to STEMN`,
 });
 
 export const FILE_UPLOADED = (filename: string, url: string): ISlackClientChatMessage => ({
-  comment: `"${filename}" has been uploaded to ${url}`,
+  text: `"${filename}" has been uploaded to ${url}`,
 });
 
 export const CHOOSE_FOLDER = ({ folders, callbackId }: {
@@ -94,4 +81,16 @@ export const WELCOME_MESSAGE = ({ projects, callbackId }: {
   callbackId,
   fallbackBody: 'You have no projects to sync with the workspace',
   title: `Hello! I'm the STEMN bot`,
+});
+
+export const SUCCESSFUL_FOLDER_SETUP = ({ project, folder, channel }: {
+  project: string;
+  folder: string;
+  channel: string;
+}): ISlackClientChatMessage => ({
+  text: `Files uploaded to ${channel} will be uploaded to your ${project} project and stored in ${folder}`,
+});
+
+export const ERROR_RESPONSE = (): ISlackClientChatMessage => ({
+  text: 'An Error has occurred',
 });

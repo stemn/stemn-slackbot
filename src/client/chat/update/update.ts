@@ -16,11 +16,11 @@ export async function updateChat ({
   messageTimestamp,
 }: MethodArguments): Promise<IClientChatUpdate> {
 
-  const { comment, attachments = [] } = message;
+  const { text, attachments = [] } = message;
 
   return client.chat.update({
     channel,
-    text: comment,
+    text,
     ts: messageTimestamp,
     as_user: false,
     attachments,

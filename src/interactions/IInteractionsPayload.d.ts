@@ -1,6 +1,8 @@
+import { AttachmentAction } from '@slack/client';
+
 export interface IInteractionsPayload {
   type: string;
-  actions: any;
+  actions: AttachmentAction[];
   callback_id: string;
   team: {
     id: string;
@@ -26,7 +28,14 @@ export interface IInteractionsPayload {
     ts: string;
     username: string;
     bot_id: string;
-    attachments: any;
+    attachments: {
+      callback_id: string;
+      fallback: string;
+      text: string;
+      id: number;
+      color: string;
+      actions: AttachmentAction[];
+    }
   };
   response_url: string;
   trigger_id: string;

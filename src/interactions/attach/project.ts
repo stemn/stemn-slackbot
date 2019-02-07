@@ -1,13 +1,15 @@
 import { CHOOSE_FOLDER, ISlackClientChatMessage } from '../../client';
 import { IInteractionsPayload } from '../IInteractionsPayload';
+import { ATTACH_FOLDER_CALLBACK_ID } from './folder';
 
 export const ATTACH_PROJECT_CALLBACK_ID = 'attach_project';
 
 export async function attachProject (payload: IInteractionsPayload): Promise<ISlackClientChatMessage> {
 
-  // set the users slack project to the payloads
-  // const project = payload.
-  console.log({ payload });
+  // only one project to select
+  const project = payload.actions[0].value;
+
+  // TODO: store and get the projects folders from stemn -> Api
 
   const folders = [{
     name: 'Folder 1',
@@ -19,6 +21,6 @@ export async function attachProject (payload: IInteractionsPayload): Promise<ISl
 
   return CHOOSE_FOLDER({
     folders,
-    callbackId: 'attach_folder',
+    callbackId: ATTACH_FOLDER_CALLBACK_ID,
   });
 }

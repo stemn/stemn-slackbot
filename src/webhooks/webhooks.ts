@@ -11,7 +11,7 @@ webhooksMiddleware.all('/installed', (req: Request, res: Response) => {
   // respond to webhook
   res.json();
 
-  // install({
-  //   webhook: req.body,
-  // });
+  install({
+    webhook: req.body,
+  });
 });

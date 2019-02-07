@@ -7,24 +7,12 @@ import {
   attachFolder,
   attachProject,
 } from './attach';
+import { handler } from './handler';
 
 const interactions = createMessageAdapter(STEMN_SLACK_SIGNING_SECRET);
 
 // handles the project selection workflow
-interactions.action(ATTACH_PROJECT_CALLBACK_ID, (payload: any, respond: any) => handleRespond(payload, respond, attachProject));
-interactions.action(ATTACH_FOLDER_CALLBACK_ID, (payload: any, respond: any) => handleRespond(payload, respond, attachFolder));
-
-async function handleRespond (payload: any, respond: any, fn: any) {
-
-  const message = await fn(payload);
-
-  respond(message);
-
-  // Before the work completes, return a message object that is the same as the original but with
-  // the interactive elements removed.
-  const reply = payload.original_message;
-  delete reply.attachments[0].actions;
-  return reply;
-}
+interactions.action(ATTACH_PROJECT_CALLBACK_ID, handler(attachProject));
+interactions.action(ATTACH_FOLDER_CALLBACK_ID, handler(attachFolder));
 
 export const interactionsMiddleware = interactions.expressMiddleware();
