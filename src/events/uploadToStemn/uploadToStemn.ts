@@ -1,7 +1,13 @@
 import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
-import { Client, FILE_UPLOADED, FILE_UPLOADING, getFileInfo, updateChat } from '../../client';
+import {
+  Client,
+  FILE_UPLOADED,
+  FILE_UPLOADING,
+  getFileInfo,
+  updateChat,
+} from '../../client';
 import { addFileComment } from './addFileComment';
 import { IEventFile } from './IEventFile';
 
@@ -12,14 +18,13 @@ import { IEventFile } from './IEventFile';
 //   STEMN_API_TOKEN,
 // } from '../config';
 
-export async function uploadToStemn ({ file, client }: {
+export async function uploadToStemn ({ file }: {
   file: IEventFile;
-  client?: Client;
 }): Promise<any> {
 
   const { file_id, user_id } = file;
 
-  client = client || new Client({ userId: user_id });
+  const client = new Client({ userId: user_id });
 
   try {
 

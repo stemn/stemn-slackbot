@@ -1,6 +1,9 @@
-import { Client, getFileInfo } from '../../client';
-import { uploadToStemn } from '../uploadToStemn';
+import { WebClient } from '@slack/client';
+
+import { getFileInfo } from '../../client';
+import { addFileComment } from './addFileComment';
 import { IEventFile } from './IEventFile';
+import { uploadToStemn } from './uploadToStemn';
 
 import {
   SLACK_BOT_ID,
@@ -10,12 +13,15 @@ import {
   SLACK_USER_ID,
 } from '../../../test/config';
 
+jest.mock('../../client/client', () => {
+  return {
+      Client : jest.fn().mockImplementation(() => new WebClient(SLACK_BOT_TOKEN)),
+  };
+});
+
 it('Upload To Stemn', async () => {
 
-  const client = new Client({
-    botId: SLACK_BOT_ID,
-    token: SLACK_BOT_TOKEN,
-  });
+  const client = new WebClient(SLACK_BOT_TOKEN);
 
   const fileEvent = <IEventFile> {
     user_id: SLACK_USER_ID,
@@ -24,9 +30,10 @@ it('Upload To Stemn', async () => {
   };
 
   await uploadToStemn({
-    client,
     file: fileEvent,
   });
+
+  // expect(addFileComment).toHaveBeenCalledTimes(1);
 
   const { ok } = await getFileInfo({
     client,

@@ -2,8 +2,6 @@ import { WebClient } from '@slack/client';
 
 export class Client extends WebClient {
 
-  public botId: string;
-
   constructor ({ userId, token, botId }: {
     userId?: string;
     token?: string;
@@ -18,8 +16,6 @@ export class Client extends WebClient {
     }
 
     super(botToken);
-
-    this.botId = botId || '';
   }
 }
 
