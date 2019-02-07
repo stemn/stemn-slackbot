@@ -1,0 +1,1 @@
+export { eventsMiddleware } from './events';

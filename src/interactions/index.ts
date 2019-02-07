@@ -1,0 +1,1 @@
+export { interactionsMiddleware } from './interactions';
