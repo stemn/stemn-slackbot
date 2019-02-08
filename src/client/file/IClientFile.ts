@@ -1,4 +1,4 @@
-import { IClientShares } from './IClientShares';
+import { IClientFileShares } from './IClientFileShares';
 
 export interface IClientFile extends ISlackResponse {
   readonly file: {
@@ -43,8 +43,8 @@ export interface IClientFile extends ISlackResponse {
     readonly ims: string[];
     readonly has_rich_preview: boolean;
     readonly shares: {
-      readonly public?: IClientShares;
-      readonly private?: IClientShares;
+      readonly public?: IClientFileShares;
+      readonly private?: IClientFileShares;
     }
   };
 }

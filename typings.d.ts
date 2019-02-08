@@ -1,5 +1,6 @@
 declare module "*.json" {
-  export const version: string;
+  const value: any;
+  export default value;
 }
 
 declare module '@slack/events-api';

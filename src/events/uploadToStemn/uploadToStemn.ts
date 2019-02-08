@@ -64,11 +64,13 @@ export async function uploadToStemn ({ file }: {
 
     // await uploadFile.pipe(getFile);
 
+    const url = 'www.stemn.com/project/containing/folder';
+
     // update the previous comment to notify that the file has been updated
     await updateChat({
       client,
       channel: file.channel_id,
-      message: FILE_UPLOADED(fileInfo.file.name, ''),
+      message: FILE_UPLOADED(fileInfo.file.name, url),
       messageTimestamp: ts,
     });
 

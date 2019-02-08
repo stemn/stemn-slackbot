@@ -1,4 +1,4 @@
-export interface IWebhookInstall extends ISlackResponse {
+export interface IWebhookInstall {
   readonly access_token: string;
   readonly scope: string;
   readonly user_id: string;
