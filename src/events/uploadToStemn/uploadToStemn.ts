@@ -1,10 +1,11 @@
+import { WebClient } from '@slack/client';
 import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
 import {
-  Client,
   FILE_UPLOADED,
   FILE_UPLOADING,
+  getClientToken,
   getFileInfo,
   getFilesLatestShare,
   postChat,
@@ -25,7 +26,9 @@ export async function uploadToStemn ({ file }: {
 
   const { file_id, user_id } = file;
 
-  const client = new Client({ userId: user_id });
+  const token = await getClientToken({ userId: user_id });
+
+  const client = new WebClient(token);
 
   try {
 

@@ -1,6 +1,5 @@
 import { ERROR_RESPONSE, ISlackClientChatMessage } from '../client';
 import { handler } from './handler';
-import { IInteractionsPayload } from './IInteractionsPayload';
 
 describe('interactions - handler', () => {
 

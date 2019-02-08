@@ -1,4 +1,6 @@
-import { Client, postChat, WELCOME_MESSAGE } from '../../client';
+import { WebClient } from '@slack/client';
+
+import { postChat, WELCOME_MESSAGE } from '../../client';
 import { ATTACH_PROJECT_CALLBACK_ID } from '../../interactions/attach';
 import { IWebhookInstall } from './IWebhookInstall';
 
@@ -11,9 +13,7 @@ export async function install ({
 }: MethodArguments): Promise<any> {
 
   // auth the client as the bot
-  const client = new Client({
-    token: webhook.bot.bot_access_token,
-  });
+  const client = new WebClient(webhook.bot.bot_access_token);
 
   try {
 

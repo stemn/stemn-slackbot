@@ -1,10 +1,11 @@
-import { Client } from '../../client';
+import { WebClient } from '@slack/client';
+
 import { ISlackClientChatMessage } from '../messages';
 import { IClientChatUpdate } from './IClientChatUpdate';
 
 interface MethodArguments {
   channel: string;
-  client: Client;
+  client: WebClient;
   message: ISlackClientChatMessage;
   messageTimestamp: string;
 }

@@ -1,9 +1,10 @@
-import { Client } from '../../client';
+import { WebClient } from '@slack/client';
+
 import { IClientFile } from '../IClientFile';
 
 interface MethodArguments {
   channels: string;
-  client: Client;
+  client: WebClient;
   comment?: string;
   file: any;
   filename?: string;

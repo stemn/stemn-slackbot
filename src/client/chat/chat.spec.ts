@@ -1,4 +1,4 @@
-import { Client } from '../client';
+import { WebClient } from '@slack/client';
 import {
   FILE_UPLOADED,
   FILE_UPLOADING,
@@ -15,9 +15,7 @@ describe('Client Chat Tests', () => {
 
   it('Post Comment and then Update the text', async () => {
 
-    const client = new Client({
-      token: SLACK_BOT_TOKEN,
-    });
+    const client = new WebClient(SLACK_BOT_TOKEN);
 
     const postedComment = await postChat({
       client,

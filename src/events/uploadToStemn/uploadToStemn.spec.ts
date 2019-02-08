@@ -11,9 +11,9 @@ import {
   SLACK_USER_ID,
 } from '../../../test/config';
 
-jest.mock('../../client/client', () => {
+jest.mock('../../client/getClientToken', (values: any) => {
   return {
-      Client : jest.fn().mockImplementation(() => new WebClient(SLACK_BOT_TOKEN)),
+    getClientToken: () => SLACK_BOT_TOKEN,
   };
 });
 

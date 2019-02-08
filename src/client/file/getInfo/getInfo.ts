@@ -1,9 +1,10 @@
-import { Client } from '../../client';
+import { WebClient } from '@slack/client';
+
 import { IClientFileInfo } from './IClientFileInfo';
 
 interface MethodArguments {
   fileId: string;
-  client: Client;
+  client: WebClient;
 }
 
 export async function getFileInfo ({

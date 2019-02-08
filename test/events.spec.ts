@@ -1,7 +1,7 @@
+import { WebClient } from '@slack/client';
 import * as _ from 'lodash';
 
 import {
-  Client,
   getFileInfo,
   IClientFileInfo,
   IClientFileShares,
@@ -47,9 +47,7 @@ async function testFileUpload ({ channels }: {
   // wait for the bot to comment on the file
   await sleep(2);
 
-  const client = new Client({
-    token: SLACK_BOT_TOKEN,
-  });
+  const client = new WebClient(SLACK_BOT_TOKEN);
 
   // check the file has one comment from the stemn slack bot
   const fileInfo = await getFileInfo({

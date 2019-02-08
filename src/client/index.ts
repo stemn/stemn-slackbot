@@ -1,3 +1,3 @@
 export * from './file';
 export * from './chat';
-export * from './client';
+export * from './getClientToken';
