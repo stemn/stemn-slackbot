@@ -15,6 +15,9 @@
   <a href="https://codecov.io/gh/stemn/stemn-slackbot">
     <img src="https://codecov.io/gh/stemn/stemn-slackbot/branch/master/graph/badge.svg" alt="CodeCov Coverage">
   </a>
+  <a href="https://snyk.io/test/github/stemn/stemn-slackbot?targetFile=package.json">
+    <img src="https://snyk.io/test/github/stemn/stemn-slackbot/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/stemn/stemn-slackbot?targetFile=package.json" style="max-width:100%;">
+  </a>
 </p>
 
 <p align="center">
