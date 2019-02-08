@@ -15,6 +15,8 @@ import {
   SLACK_PUBLIC_CHANNEL,
 } from './config';
 
+const timeout = 15 * 1000;
+
 describe('Slack Events', () => {
 
   it('User Uploaded to Public Channel', async () => {
@@ -22,14 +24,14 @@ describe('Slack Events', () => {
     // test public channel
     await testFileUpload({ channels: SLACK_PUBLIC_CHANNEL });
 
-  });
+  }, timeout);
 
   it('User Uploaded to Private Channel', async () => {
 
     // test private channel
      await testFileUpload({ channels: SLACK_PRIVATE_CHANNEL });
 
-  });
+  }, timeout);
 });
 
 async function testFileUpload ({ channels }: {
