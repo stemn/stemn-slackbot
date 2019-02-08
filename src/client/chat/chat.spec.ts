@@ -7,7 +7,6 @@ import {
 } from './';
 
 import {
-  SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
   SLACK_PUBLIC_CHANNEL,
 } from '../../../test/config';

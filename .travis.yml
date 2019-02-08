@@ -57,4 +57,4 @@ script:
       --name test \
       --network stemn-slackbot_slack-backend \
       node:11-alpine \
-      yarn test
+      yarn test --maxWorkers=4
