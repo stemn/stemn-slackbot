@@ -6,7 +6,7 @@ services:
     command: yarn start:watch
 
   test:
-    image: tomnlittle/node-jest
+    image: tomnlittle/node-jest:1.0
     command: yarn test:watch --runInBand
     restart: on-failure
     labels:

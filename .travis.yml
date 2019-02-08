@@ -68,5 +68,5 @@ script:
       --env CODECOV_TOKEN=$CODECOV_TOKEN \
       --name test-coverage \
       --network stemn-slackbot_slack-backend \
-      tomnlittle/node-jest \
+      tomnlittle/node-jest:1.0 \
       yarn codecov
