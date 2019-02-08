@@ -7,7 +7,7 @@ services:
 
   test:
     image: tomnlittle/node-jest
-    command: yarn test:watch
+    command: yarn test:watch --runInBand
     restart: on-failure
     labels:
       namespace: slack
