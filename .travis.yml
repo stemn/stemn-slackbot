@@ -40,6 +40,7 @@ script:
 
   - docker ps
 
+  # Run the tests
   - |
     docker run \
       -v $PWD:/app \
@@ -58,3 +59,14 @@ script:
       --network stemn-slackbot_slack-backend \
       node:11-alpine \
       yarn test --maxWorkers=4
+
+  # Upload test coverage
+  - |
+    docker run \
+      -v $PWD:/app \
+      -w /app \
+      --env CODECOV_TOKEN=$CODECOV_TOKEN \
+      --name test-coverage \
+      --network stemn-slackbot_slack-backend \
+      node:11-alpine \
+      yarn codecov

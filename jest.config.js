@@ -1,10 +1,8 @@
 module.exports = {
   transform: { '\.tsx?$': 'ts-jest', },
-  collectCoverage: false,
   testRegex: '\\w\\.spec\\.ts$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
-  coverageDirectory: ".coverage",
-  coverageReporters: ['text', 'text-summary'],
+  coverageDirectory: "./coverage/",
   testEnvironment: "node",
   coverageThreshold: {
     global: {

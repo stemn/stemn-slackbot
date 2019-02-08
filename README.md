@@ -12,6 +12,9 @@
     <img src="https://travis-ci.org/stemn/stemn-slackbot.svg?branch=master"
          alt="Travis Build">
   </a>
+  <a href="https://codecov.io/gh/stemn/stemn-slackbot">
+    <img src="https://codecov.io/gh/stemn/stemn-slackbot/branch/master/graph/badge.svg" alt="CodeCov Coverage">
+  </a>
 </p>
 
 <p align="center">
