@@ -68,5 +68,5 @@ script:
       --env CODECOV_TOKEN=$CODECOV_TOKEN \
       --name test-coverage \
       --network stemn-slackbot_slack-backend \
-      node:11-alpine \
+      tomnlittle/node-jest \
       yarn codecov
