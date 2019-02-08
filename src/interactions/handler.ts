@@ -9,7 +9,6 @@ export const handler = (fn: InteractionFunction) => async (payload: IInteraction
     const message = await fn(payload);
     respond(message);
   } catch (e) {
-
     console.error(e);
 
     const message = ERROR_RESPONSE();
