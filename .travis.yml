@@ -58,7 +58,7 @@ script:
       --name test \
       --network stemn-slackbot_slack-backend \
       node:11-alpine \
-      yarn test --maxWorkers=4
+      yarn test --maxWorkers=4 --coverage
 
   # Upload test coverage
   - |
