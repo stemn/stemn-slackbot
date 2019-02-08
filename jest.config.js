@@ -3,6 +3,11 @@ module.exports = {
   testRegex: '\\w\\.spec\\.ts$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   coverageDirectory: "./coverage/",
+  collectCoverageFrom: [
+    "./src/**/*",
+    "!./src/config/*",
+    "!./src/app.ts"
+  ],
   testEnvironment: "node",
   coverageThreshold: {
     global: {
