@@ -57,7 +57,7 @@
     "start": "node build/src/app",
     "start:watch": "tsc-watch --onSuccess 'yarn start'",
     "terminal": "tmuxinator local",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:watch": "yarn test --watch"
   },
   "version": "1.0.0"
