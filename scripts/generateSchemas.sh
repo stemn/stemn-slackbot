@@ -2,9 +2,8 @@
 SCHEMAS_FOLDER=schemas
 INDEX_FILE="${SCHEMAS_FOLDER}/index.ts"
 
-mkdir -p $SCHEMAS_FOLDER
-
-rm $INDEX_FILE
+rm -rf $SCHEMAS_FOLDER
+mkdir $SCHEMAS_FOLDER
 
 INTERFACES='
   ./src/webhooks/install/IWebhookInstall.ts
@@ -23,8 +22,7 @@ for i in $INTERFACES; do
           echo "import * as ${FILENAME_SCHEMA} from './${FILENAME}.json';"
           echo "const ${FILENAME} = ${FILENAME_SCHEMA}.definitions.${FILENAME};"
           echo "export { ${FILENAME} };"
-          echo
-
+          echo ""
   } >> $INDEX_FILE
 
 done
