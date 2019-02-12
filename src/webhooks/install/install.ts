@@ -2,6 +2,7 @@ import { WebClient } from '@slack/client';
 
 import { postChat, WELCOME_MESSAGE } from '../../client';
 import { ATTACH_PROJECT_CALLBACK_ID } from '../../interactions/attach';
+import { request } from '../../utils';
 import { IWebhookInstall } from './IWebhookInstall';
 
 interface MethodArguments {
@@ -26,13 +27,14 @@ export async function install ({
      */
 
     // get the users projects from stemn -> Api call
-    const projects = [{
-      name: 'Project 1',
-      id: '12345678',
-    }, {
-      name: 'Project 2',
-      id: '987654321',
-    }];
+    const projects = await request({
+      endpoint: '/api/v1/projects',
+      method: 'GET',
+      qs: {
+        botId: webhook.bot.bot_user_id,
+        userId: webhook.user_id,
+      },
+    }) as any;
 
     // welcome the user ask the user what project they want to upload too
     const message = WELCOME_MESSAGE({

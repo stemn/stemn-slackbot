@@ -17,7 +17,7 @@ import {
 
 const timeout = 15 * 1000;
 
-describe('Slack Events', () => {
+describe('Events End to End', () => {
 
   it('User Uploaded to Public Channel', async () => {
 

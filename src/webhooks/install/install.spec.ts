@@ -1,6 +1,9 @@
 import { install } from './install';
 import { IWebhookInstall } from './IWebhookInstall';
 
+import * as client from '../../client';
+import * as request from '../../utils';
+
 import {
   SLACK_BOT_ID,
   SLACK_BOT_TOKEN,
@@ -12,6 +15,20 @@ import {
 describe('Webhooks', () => {
 
   it('Slack App Installed', async () => {
+
+    const requestResponse = [{
+      name: 'Project 1',
+      id: '12345678',
+    }, {
+      name: 'Project 2',
+      id: '987654321',
+    }];
+
+    const requestMock = jest.spyOn(request, 'request');
+    requestMock.mockReturnValue(requestResponse as any);
+
+    const postChatMock = jest.spyOn(client, 'postChat');
+    postChatMock.mockImplementation();
 
     const body = <IWebhookInstall> {
       ok: true,
@@ -32,8 +49,17 @@ describe('Webhooks', () => {
       },
     };
 
-    const response = await install({
+    await install({
       webhook: body,
+    });
+
+    expect(requestMock).toBeCalled();
+    expect(postChatMock).toBeCalled();
+
+    expect(postChatMock).toBeCalledWith({
+      channel: body.incoming_webhook.channel_id,
+      client: expect.any(Object),
+      message: expect.any(Object),
     });
   });
 });
