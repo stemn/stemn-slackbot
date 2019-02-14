@@ -18,6 +18,7 @@
   },
   "description": "",
   "devDependencies": {
+    "@stemn/jest-config": "^0.0.10",
     "@stemn/tsconfig": "^0.0.6",
     "@stemn/tslint-config": "0.0.2",
     "@types/bluebird": "^3.5.23",
@@ -58,7 +59,7 @@
     "docker:stop": "docker-compose -f docker-compose.yaml -f docker-compose-dev.yaml down",
     "lint": "yarn tsc --noEmit",
     "setup:test:environment": "ts-node scripts/setupTestEnvironment",
-    "start": "node build/src/app",
+    "start": "node build/src/app --inspect=0.0.0.0:9229",
     "start:watch": "tsc-watch --onSuccess 'yarn start'",
     "terminal": "tmuxinator local",
     "test": "jest",
