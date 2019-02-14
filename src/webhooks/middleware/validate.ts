@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 const ajv = new Ajv({ logger: false, allErrors: true });
 
-export const validateMiddleware = (schema: any) => {
+export const validate = (schema: any) => {
 
   const compiledSchema = ajv.compile(schema);
 

@@ -8,8 +8,10 @@ import {
   SLACK_BOT_TOKEN,
   SLACK_PUBLIC_CHANNEL,
   SLACK_PUBLIC_CHANNEL_FILE_ID,
+  SLACK_TEAM_ID,
   SLACK_USER_ID,
 } from '../../../test/config';
+import { IEventBody } from '../IEventBody';
 
 jest.mock('../../client/getClientToken', () => {
   return {
@@ -27,8 +29,13 @@ it('Upload To Stemn', async () => {
     channel_id: SLACK_PUBLIC_CHANNEL,
   };
 
+  const eventBody = <IEventBody> {
+    team_id: SLACK_TEAM_ID,
+  };
+
   await uploadToStemn({
     file: fileEvent,
+    eventBody,
   });
 
   const { ok } = await getFileInfo({

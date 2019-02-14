@@ -7,6 +7,7 @@ interface ITestConfig {
   SLACK_PUBLIC_CHANNEL: string;
   SLACK_PUBLIC_CHANNEL_FILE_ID: string;
   STEMN_SLACK_BOT_SERVER_HOST: string;
+  SLACK_TEAM_ID: string;
 }
 
 export const {
@@ -17,5 +18,6 @@ export const {
   SLACK_PRIVATE_CHANNEL,
   SLACK_PUBLIC_CHANNEL,
   SLACK_PUBLIC_CHANNEL_FILE_ID,
+  SLACK_TEAM_ID,
   STEMN_SLACK_BOT_SERVER_HOST = 'localhost',
 }: ITestConfig = <any> process.env;

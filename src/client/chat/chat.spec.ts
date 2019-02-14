@@ -20,7 +20,7 @@ describe('Client Chat Tests', () => {
     const postedComment = await postChat({
       client,
       channel: SLACK_PUBLIC_CHANNEL,
-      message: FILE_UPLOADING('Test Message'),
+      message: FILE_UPLOADING({ filename: 'Test file' }),
     });
 
     expect(postedComment.ok).toBe(true);
@@ -28,7 +28,7 @@ describe('Client Chat Tests', () => {
     const updatedComment = await updateChat({
       client,
       channel: SLACK_PUBLIC_CHANNEL,
-      message: FILE_UPLOADED('Test Message', 'Updated'),
+      message: FILE_UPLOADED({ filename: 'Test file', url: 'url file' }),
       messageTimestamp: postedComment.ts,
     });
 

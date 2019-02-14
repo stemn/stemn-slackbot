@@ -6,11 +6,13 @@ rm -rf $SCHEMAS_FOLDER
 mkdir $SCHEMAS_FOLDER
 
 INTERFACES='
-  ./src/webhooks/install/IWebhookInstall.ts
+  ./src/webhooks/routes/install/IWebhookInstall.ts
+  ./src/webhooks/routes/options/IWebhookOptions.ts
 '
 
 for i in $INTERFACES; do
   FILENAME="$(basename "$i" | cut -d'.' -f1)"
+
   yarn quicktype \
     --src "$i" \
     -l schema \
