@@ -1,4 +1,5 @@
 import { WebClient } from '@slack/client';
+// import { SDK } from '@stemn/sdk';
 import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
@@ -11,24 +12,23 @@ import {
   postChat,
   updateChat,
 } from '../../client';
+import { STEMN_API_TOKEN } from '../../config/stemn';
+import { IEventBody } from '../IEventBody';
 import { IEventFile } from './IEventFile';
 
-// import {
-//   STEMN_API_HOST,
-//   STEMN_API_PORT,
-//   STEMN_API_PROTOCOL,
-//   STEMN_API_TOKEN,
-// } from '../config';
-
-export async function uploadToStemn ({ file }: {
+export async function uploadToStemn ({ file, eventBody }: {
   file: IEventFile;
+  eventBody: IEventBody
 }): Promise<any> {
 
   const { file_id, user_id } = file;
 
-  const token = await getClientToken({ userId: user_id });
+  // get team
+  const { team_id: teamId } = eventBody;
+  const token = await getClientToken({ teamId });
 
   const client = new WebClient(token);
+  // const stemnSdk = new SDK({ token: STEMN_API_TOKEN });
 
   try {
 
@@ -37,17 +37,17 @@ export async function uploadToStemn ({ file }: {
       fileId: file_id,
     });
 
-    const { latest_reply } = getFilesLatestShare({
+    const { latest_reply: threadTimestamp } = getFilesLatestShare({
       fileInfo,
       channel: file.channel_id,
     });
 
-    const { ts } = await postChat({
+    const { ts: messageTimestamp } = await postChat({
       client,
       channel: file.channel_id,
-      message: FILE_UPLOADING(fileInfo.file.name),
+      message: FILE_UPLOADING({ filename: fileInfo.file.name }),
       broadcast: false,
-      threadTimestamp: latest_reply,
+      threadTimestamp,
     });
 
     const getFile = rp(fileInfo.file.url_private_download, {
@@ -58,11 +58,9 @@ export async function uploadToStemn ({ file }: {
       },
     });
 
-    // const uploadFile = rp(`${STEMN_API_PROTOCOL}://${STEMN_API_HOST}:${STEMN_API_PORT}/api/v1/uploads`, {
+    // const uploadFile = stemnRequest({
+    //   endpoint: '/api/v1/uploads',
     //   method: 'POST',
-    //   headers: {
-    //     Authorization: `Bearer ${STEMN_API_TOKEN}`,
-    //   },
     // });
 
     // await uploadFile.pipe(getFile);
@@ -73,8 +71,8 @@ export async function uploadToStemn ({ file }: {
     await updateChat({
       client,
       channel: file.channel_id,
-      message: FILE_UPLOADED(fileInfo.file.name, url),
-      messageTimestamp: ts,
+      message: FILE_UPLOADED({ filename: fileInfo.file.name, url }),
+      messageTimestamp,
     });
 
   } catch (e) {
