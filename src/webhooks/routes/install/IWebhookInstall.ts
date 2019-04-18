@@ -1,5 +1,4 @@
 export interface IWebhookInstall {
-  readonly stemn_user_id: string;
   readonly access_token: string;
   readonly scope: string;
   readonly user_id: string;

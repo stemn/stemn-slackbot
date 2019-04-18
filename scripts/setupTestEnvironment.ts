@@ -1,8 +1,8 @@
-/* tslint:disable:no-console ter-max-len */
 import { WebClient } from '@slack/client';
 import { createReadStream, writeFileSync } from 'fs';
 import * as _ from 'lodash';
 
+/* tslint:disable:no-console ter-max-len */
 const OUTPUT_FILE = '.env';
 const SAMPLE_FILE = __dirname + '/../test/sample_image.png';
 
@@ -63,8 +63,8 @@ createChannels().then(async ({ channel, group }) => {
   SLACK_SIGNING_SECRET=
 
   # Testing Configuration
-  SLACK_BOT_ID=
-  SLACK_BOT_TOKEN=
+  SLACKBOT_ID=
+  SLACKBOT_TOKEN=
 
   SLACK_USER_ID=${_.get(privateChannelFile, 'file.user')}
   SLACK_USER_TOKEN=${token}

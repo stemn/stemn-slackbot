@@ -1,21 +1,13 @@
 import { WebClient } from '@slack/client';
-import {
-  FILE_UPLOADED,
-  FILE_UPLOADING,
-  postChat,
-  updateChat,
-} from './';
 
-import {
-  SLACK_BOT_TOKEN,
-  SLACK_PUBLIC_CHANNEL,
-} from '../../../test/config';
+import { SLACK_PUBLIC_CHANNEL, SLACKBOT_TOKEN } from '../../../test/config';
+import { FILE_UPLOADED, FILE_UPLOADING, postChat, updateChat } from './';
 
 describe('Client Chat Tests', () => {
 
   it('Post Comment and then Update the text', async () => {
 
-    const client = new WebClient(SLACK_BOT_TOKEN);
+    const client = new WebClient(SLACKBOT_TOKEN);
 
     const postedComment = await postChat({
       client,

@@ -36,7 +36,7 @@ before_install:
       yarn build
 
 script:
-  - docker-compose -f docker-compose.yaml -p stemn-slackbot up -d
+  - docker-compose -f docker-compose.yaml -p slackbot up -d
 
   - docker ps
 
@@ -45,18 +45,18 @@ script:
     docker run \
       -v $PWD:/app \
       -w /app \
-      --env SLACK_BOT_ID=$SLACK_BOT_ID \
-      --env SLACK_BOT_TOKEN=$SLACK_BOT_TOKEN \
+      --env SLACKBOT_ID=$SLACKBOT_ID \
+      --env SLACKBOT_TOKEN=$SLACKBOT_TOKEN \
       --env SLACK_USER_ID=$SLACK_USER_ID \
       --env SLACK_USER_TOKEN=$SLACK_USER_TOKEN \
       --env SLACK_PRIVATE_CHANNEL=$SLACK_PRIVATE_CHANNEL \
       --env SLACK_PUBLIC_CHANNEL=$SLACK_PUBLIC_CHANNEL \
       --env SLACK_PUBLIC_CHANNEL_FILE_ID=$SLACK_PUBLIC_CHANNEL_FILE_ID \
-      --env STEMN_SLACK_BOT_SERVER_HOST=http://api \
-      --env STEMN_SLACK_BOT_SERVER_PORT=3000 \
-      --env STEMN_SLACK_SIGNING_SECRET=$STEMN_SLACK_SIGNING_SECRET \
+      --env CLOUD_COMPUTER_SLACKBOT_SERVER_HOST=http://api \
+      --env CLOUD_COMPUTER_SLACKBOT_SERVER_PORT=3000 \
+      --env CLOUD_COMPUTER_SLACK_SIGNING_SECRET=$CLOUD_COMPUTER_SLACK_SIGNING_SECRET \
       --name test \
-      --network stemn-slackbot_slack-backend \
+      --network slackbot_slack-backend \
       node:11-alpine \
       yarn test --maxWorkers=4 --coverage
 
@@ -67,6 +67,6 @@ script:
       -w /app \
       --env CODECOV_TOKEN=$CODECOV_TOKEN \
       --name test-coverage \
-      --network stemn-slackbot_slack-backend \
+      --network slackbot_slack-backend \
       tomnlittle/node-jest:1.0 \
       yarn codecov

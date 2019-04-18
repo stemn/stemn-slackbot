@@ -1,6 +1,6 @@
 import { createMessageAdapter } from '@slack/interactive-messages';
 
-import { STEMN_SLACK_SIGNING_SECRET } from '../config/slack';
+import { CLOUD_COMPUTER_SLACK_SIGNING_SECRET } from '../config/slack';
 import { handler } from './handler';
 import {
   completedSetup,
@@ -9,7 +9,7 @@ import {
   startSetup,
 } from './setup';
 
-const interactions = createMessageAdapter(STEMN_SLACK_SIGNING_SECRET);
+const interactions = createMessageAdapter(CLOUD_COMPUTER_SLACK_SIGNING_SECRET);
 
 // handles the project selection workflow
 interactions.action(SETUP_COMPLETED_CALLBACK_ID, handler(completedSetup));

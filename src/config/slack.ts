@@ -1,7 +1,7 @@
 export interface ISlackConfig {
-  STEMN_SLACK_SIGNING_SECRET: string;
+  CLOUD_COMPUTER_SLACK_SIGNING_SECRET: string;
 }
 
 export const {
-  STEMN_SLACK_SIGNING_SECRET,
+  CLOUD_COMPUTER_SLACK_SIGNING_SECRET,
 }: ISlackConfig = <any> process.env;

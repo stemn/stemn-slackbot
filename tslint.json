@@ -1,5 +1,5 @@
 {
-  "extends": "@stemn/tslint-config",
+  "extends": "@cloud-computer/tslint-config",
   "rules": {
     "no-console": [true, "log"],
     "no-implicit-dependencies": [true, "dev"],

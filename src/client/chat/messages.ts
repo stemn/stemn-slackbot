@@ -50,7 +50,7 @@ function createMessage ({ title, body, fallbackBody, actions, callbackId }: {
 export const FILE_UPLOADING = ({ filename }: {
   filename: string;
 }): ISlackClientChatMessage => ({
-  text: `"${filename}" is uploading to STEMN`,
+  text: `"${filename}" is uploading to your cloud computer`,
 });
 
 export const FILE_UPLOADED = ({ filename, url }: {
@@ -67,18 +67,18 @@ export const WELCOME_MESSAGE = ({ callbackId }: {
     name: 'Setup',
     id: 'setup',
   }],
-  body: 'Setup your Stemn Project with this workspace',
+  body: 'Setup your cloud computer with this workspace',
   callbackId,
-  fallbackBody: 'You have no projects to sync with the workspace',
-  title: `Hello! I'm the STEMN bot`,
+  fallbackBody: 'You have no cloud computer to sync with the workspace',
+  title: 'Hello, I\'m the cloud computer bot!',
 });
 
-export const SUCCESSFUL_FOLDER_SETUP = ({ project, folder, channel }: {
+export const SUCCESSFUL_FOLDER_SETUP = ({ folder, channel }: {
   project: string;
   folder: string;
   channel: string;
 }): ISlackClientChatMessage => ({
-  text: `Files uploaded to ${channel} will be uploaded to your ${project} project and stored in ${folder}`,
+  text: `Files uploaded to ${channel} will be uploaded to your cloud computer and stored in ${folder}`,
 });
 
 export const ERROR_RESPONSE = (): ISlackClientChatMessage => ({

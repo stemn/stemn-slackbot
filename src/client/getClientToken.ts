@@ -3,5 +3,5 @@
 export async function getClientToken ({ teamId }: {
   teamId: string;
 }): Promise<string> {
-  return process.env.SLACK_BOT_TOKEN || '';
+  return process.env.SLACKBOT_TOKEN || '';
 }

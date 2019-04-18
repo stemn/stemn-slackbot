@@ -1,27 +1,26 @@
 import { WebClient } from '@slack/client';
 
-import { getFileInfo } from '../../client';
-import { IEventFile } from './IEventFile';
-import { uploadToStemn } from './uploadToStemn';
-
 import {
-  SLACK_BOT_TOKEN,
   SLACK_PUBLIC_CHANNEL,
   SLACK_PUBLIC_CHANNEL_FILE_ID,
   SLACK_TEAM_ID,
   SLACK_USER_ID,
+  SLACKBOT_TOKEN,
 } from '../../../test/config';
+import { getFileInfo } from '../../client';
 import { IEventBody } from '../IEventBody';
+import { IEventFile } from './IEventFile';
+import { uploadToStemn } from './uploadToStemn';
 
 jest.mock('../../client/getClientToken', () => {
   return {
-    getClientToken: () => SLACK_BOT_TOKEN,
+    getClientToken: () => SLACKBOT_TOKEN,
   };
 });
 
 it('Upload To Stemn', async () => {
 
-  const client = new WebClient(SLACK_BOT_TOKEN);
+  const client = new WebClient(SLACKBOT_TOKEN);
 
   const fileEvent = <IEventFile> {
     user_id: SLACK_USER_ID,

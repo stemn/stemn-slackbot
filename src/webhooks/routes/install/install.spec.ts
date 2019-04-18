@@ -1,19 +1,16 @@
 import * as request from 'supertest';
-import { server } from '../../../server';
-
-import { install } from './install';
-import { IWebhookInstall } from './IWebhookInstall';
-
-import * as client from '../../../client';
-// import * as request from '../../utils';
 
 import {
-  SLACK_BOT_ID,
-  SLACK_BOT_TOKEN,
   SLACK_PRIVATE_CHANNEL,
   SLACK_USER_ID,
   SLACK_USER_TOKEN,
+  SLACKBOT_ID,
+  SLACKBOT_TOKEN,
 } from '../../../../test/config';
+import { server } from '../../../server';
+import { IWebhookInstall } from './IWebhookInstall';
+
+// import * as request from '../../utils';
 
 describe('Webhooks', () => {
 
@@ -34,7 +31,6 @@ describe('Webhooks', () => {
     // postChatMock.mockImplementation();
 
     const body = <IWebhookInstall> {
-      stemn_user_id: '',
       access_token: SLACK_USER_TOKEN,
       scope: 'identify,bot,commands,incoming-webhook,chat:write:bot',
       user_id: SLACK_USER_ID,
@@ -47,8 +43,8 @@ describe('Webhooks', () => {
           url: '',
       },
       bot: {
-        bot_user_id: SLACK_BOT_ID,
-        bot_access_token: SLACK_BOT_TOKEN,
+        bot_user_id: SLACKBOT_ID,
+        bot_access_token: SLACKBOT_TOKEN,
       },
     };
 
