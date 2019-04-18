@@ -5,7 +5,7 @@ export const SETUP_DIALOG = ({ callbackId, state }: {
   state: string;
 }): Dialog => ({
   callback_id: callbackId,
-  title: 'Setup your Cloud Computer',
+  title: 'Setup your STEMN Project',
   submit_label: 'Confirm',
   notify_on_cancel: false,
   state,

@@ -1,5 +1,9 @@
-import { SLACK_TEAM_ID, SLACKBOT_TOKEN } from '../../test/config';
 import { getClientToken } from './getClientToken';
+
+import {
+  SLACK_BOT_TOKEN,
+  SLACK_TEAM_ID,
+} from '../../test/config';
 
 describe('client - getClientToken', () => {
 
@@ -9,7 +13,7 @@ describe('client - getClientToken', () => {
       teamId: SLACK_TEAM_ID,
     });
 
-    expect(token).toBe(SLACKBOT_TOKEN);
+    expect(token).toBe(SLACK_BOT_TOKEN);
 
   });
 });

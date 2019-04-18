@@ -1,4 +1,7 @@
-import { ISlackClientChatMessage } from '../../../client';
+import { WebClient } from '@slack/client';
+
+import { ISlackClientChatMessage, openDialog, SETUP_DIALOG } from '../../../client';
+import { STEMN_API_TOKEN } from '../../../config/stemn';
 import { IInteractionsPayload } from '../../IInteractionsPayload';
 
 export const SETUP_CALLBACK_ID = 'setup_callback_id';

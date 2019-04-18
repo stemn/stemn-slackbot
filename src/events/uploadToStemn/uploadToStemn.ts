@@ -1,4 +1,6 @@
 import { WebClient } from '@slack/client';
+// import { SDK } from '@stemn/sdk';
+import * as _ from 'lodash';
 import * as rp from 'request-promise';
 
 import {
@@ -10,6 +12,7 @@ import {
   postChat,
   updateChat,
 } from '../../client';
+import { STEMN_API_TOKEN } from '../../config/stemn';
 import { IEventBody } from '../IEventBody';
 import { IEventFile } from './IEventFile';
 
@@ -25,6 +28,7 @@ export async function uploadToStemn ({ file, eventBody }: {
   const token = await getClientToken({ teamId });
 
   const client = new WebClient(token);
+  // const stemnSdk = new SDK({ token: STEMN_API_TOKEN });
 
   try {
 
@@ -54,14 +58,14 @@ export async function uploadToStemn ({ file, eventBody }: {
       },
     });
 
-    // const uploadFile = uploadRequest({
+    // const uploadFile = stemnRequest({
     //   endpoint: '/api/v1/uploads',
     //   method: 'POST',
     // });
 
     // await uploadFile.pipe(getFile);
 
-    const url = 'www.cloud-computer.com/project/containing/folder';
+    const url = 'www.stemn.com/project/containing/folder';
 
     // update the previous comment to notify that the file has been updated
     await updateChat({

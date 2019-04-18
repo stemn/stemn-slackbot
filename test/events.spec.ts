@@ -1,9 +1,19 @@
 import { WebClient } from '@slack/client';
 import * as _ from 'lodash';
 
-import { getFileInfo, IClientFileInfo, IClientFileShares } from '../src/client';
-import { SLACK_PRIVATE_CHANNEL, SLACK_PUBLIC_CHANNEL, SLACKBOT_TOKEN } from './config';
+import {
+  getFileInfo,
+  IClientFileInfo,
+  IClientFileShares,
+} from '../src/client';
+
 import { sleep, uploadTestFile } from './utils';
+
+import {
+  SLACK_BOT_TOKEN,
+  SLACK_PRIVATE_CHANNEL,
+  SLACK_PUBLIC_CHANNEL,
+} from './config';
 
 const timeout = 15 * 1000;
 
@@ -39,9 +49,9 @@ async function testFileUpload ({ channels }: {
   // wait for the bot to comment on the file
   await sleep(2);
 
-  const client = new WebClient(SLACKBOT_TOKEN);
+  const client = new WebClient(SLACK_BOT_TOKEN);
 
-  // check the file has one comment from the slack bot
+  // check the file has one comment from the stemn slack bot
   const fileInfo = await getFileInfo({
     client,
     fileId: file.id,
